@@ -933,7 +933,7 @@
 									"script": {
 										"id": "ca9e4e11-cdfc-4d70-bd23-e7ac0f0c6fa7",
 										"exec": [
-											"pm.test(\"Status code is 99999999997275\", ()=>{\r",
+											"pm.test(\"Status code is 888888888888\", ()=>{\r",
 											"    pm.response.to.have.status(200)\r",
 											"})\r",
 											"\r",
@@ -6415,14 +6415,17 @@
 	],
 	"variable": [
 		{
+			"id": "1f235514-d39e-4fc8-bb5f-1a5f7ff7a37c",
 			"key": "token",
 			"value": ""
 		},
 		{
+			"id": "aef0f09e-fafc-4f37-a5c2-34331ca3286b",
 			"key": "token_emptyCart",
 			"value": ""
 		},
 		{
+			"id": "eafe5126-5c5c-4a95-b685-2d3f67062b38",
 			"key": "current_qty",
 			"value": "1"
 		}
