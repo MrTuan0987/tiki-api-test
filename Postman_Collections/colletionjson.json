@@ -933,7 +933,7 @@
 									"script": {
 										"id": "ca9e4e11-cdfc-4d70-bd23-e7ac0f0c6fa7",
 										"exec": [
-											"pm.test(\"Status code is 20444444\", ()=>{\r",
+											"pm.test(\"Status code is 2077777777\", ()=>{\r",
 											"    pm.response.to.have.status(200)\r",
 											"})\r",
 											"\r",
@@ -6415,17 +6415,17 @@
 	],
 	"variable": [
 		{
-			"id": "049005f7-529a-488d-ba87-4cd2c862d150",
+			"id": "e17528eb-9f57-4cd5-8b60-43dbcc139c55",
 			"key": "token",
 			"value": ""
 		},
 		{
-			"id": "f098b777-680f-4ca4-abc7-1037b2c5fb2e",
+			"id": "f2044708-1ab2-487f-8898-e0b380e64db2",
 			"key": "token_emptyCart",
 			"value": ""
 		},
 		{
-			"id": "4111b477-717e-4792-8def-71f894a8efbb",
+			"id": "0c572530-0a6f-46f6-a86e-9c4c0799ca79",
 			"key": "current_qty",
 			"value": "1"
 		}
