@@ -1,0 +1,6428 @@
+{
+	"info": {
+		"_postman_id": "970a3fdd-bcaf-4f76-a579-0ce8bc782392",
+		"name": "Project_2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login_Email, pass",
+					"item": [
+						{
+							"name": "Login_Email/Pass_Fail_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9ba65ef1-ff02-4fce-af07-01444753fc3b",
+										"exec": [
+											"pm.test(\"Status code is 555555555555555\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Hiện thông báo lỗi Capcha\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(`Có lỗi trong quá trình kiểm tra captcha`)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "08e9cff3-d5d0-4719-9af8-7cc3d2bb3de7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"quanngomaiphuc@gmail.com\",\"password\":\"Tuan27072003@!\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"ZjNkMDA2NTktYWI3Yi00NjViLTkxN2QtNWEyNWExYTcwOTIw\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Login Email/pass_200_simulation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Sinh ra 1 accessToken\", ()=>{\r",
+											"    pm.expect(pm.response.json.accessToken).to.not.be.null\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "62fb19b9-f5c0-41a2-85b9-6290e162d01d"
+									}
+								}
+							],
+							"id": "3e099dce-a56e-4c40-9106-1717d6593a2c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"emilys\",\r\n    \"password\": \"emilyspass\"\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dummyjson.com/auth/login"
+							},
+							"response": []
+						},
+						{
+							"name": "Nhập sai email_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện message 'Thông tin đăng nhập không đúng4567'\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Thông tin đăng nhập không đúng\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "ebe49dfc-caed-4b54-a693-8a6a1cb49aa4"
+									}
+								}
+							],
+							"id": "ccf5d567-4747-4da6-9b85-e08bbfb1a579",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"anngomaiphuc@gmail.com\",\"password\":\"Dapgiailoitaiai?0987!\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"ZjNkMDA2NTktYWI3Yi00NjViLTkxN2QtNWEyNWExYTcwOTIw\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Bỏ trống Email_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện message 'Vui lòng nhập email'\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Vui lòng nhập email\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "a7476b1d-456d-411d-81f1-7b1e0152835a"
+									}
+								}
+							],
+							"id": "6d916f4a-f1df-4bd1-8bc4-31766129263c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"\",\"password\":\"Dapgiailoitaiai?0987!\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"ZjNkMDA2NTktYWI3Yi00NjViLTkxN2QtNWEyNWExYTcwOTIw\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Nhập sai Pass_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện message 'Vui lòng nhập pass'\", function () {\r",
+											"    pm.expect(pm.response.json().error.message).to.eql(\"Có lỗi trong quá trình kiểm tra captcha\")\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "9141d466-babb-4130-86c0-1e204f1d0890"
+									}
+								}
+							],
+							"id": "a83347e9-8aa1-4541-9731-cdbd742f7bbf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"quanngomaiphuc@gmail.com\",\"password\":\"234asdasd\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"ZjNkMDA2NTktYWI3Yi00NjViLTkxN2QtNWEyNWExYTcwOTIw\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Bỏ trống Pass_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện message 'Vui lòng nhập pass'\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Vui lòng nhập pass\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "a1c1c645-fe89-4119-8b66-4ad60511d60e"
+									}
+								}
+							],
+							"id": "08e14e7a-0051-4d41-ab63-f880a932a346",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"quanngomaiphuc@gmail.com\",\"password\":\"\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"ZjNkMDA2NTktYWI3Yi00NjViLTkxN2QtNWEyNWExYTcwOTIw\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Login_Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", ()=>{\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "70a9ba15-fbd3-4f14-bbd5-8e264d97b67f"
+									}
+								}
+							],
+							"id": "20712dac-8a23-4394-bdbc-a165a9d0ceb1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"quanngomaic@gmail.com\",\"password\":\"Dapgiailoitaiai?0987!\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"ZjNkMDA2NTktYWI3Yi00NjViLTkxN2QtNWEyNWExYTcwOTIw\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tok"
+							},
+							"response": []
+						},
+						{
+							"name": "Login_Chọn sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "010f7d62-abaa-4649-ac88-4f8b0b5ccc3b"
+									}
+								}
+							],
+							"id": "8ebaa85c-04cb-40ce-ba2c-4229f13dea00",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"quanngomaic@gmail.com\",\"password\":\"Dapgiailoitaiai?0987!\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"ZjNkMDA2NTktYWI3Yi00NjViLTkxN2QtNWEyNWExYTcwOTIw\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						}
+					],
+					"id": "80b90507-b93e-4b3d-940c-03b24afdbdaa"
+				},
+				{
+					"name": "Check Exist_Phone",
+					"item": [
+						{
+							"name": "Check_Exist_200 OK",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Body trả về có existed = true\", function () {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.existed).to.eql(true);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "fa2e7975-68dc-470a-9576-119209b49c80"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "c4c2bc3a-f4a2-4e7f-a78b-c82506855f45"
+									}
+								}
+							],
+							"id": "132ecf45-c7c0-43c8-939b-59ebeca39ef3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"phone\":\"0346569108\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/customers/exist"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_Exist_Nhập SĐT chưa đky_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Body trả về có existed = false\", function () {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.existed).to.eql(false);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "ab8a2583-ffe1-4d39-93d9-fcca0576ea55"
+									}
+								}
+							],
+							"id": "c0ab61a2-e11e-456a-a160-2d94f2038882",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"phone\":\"0346569106\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/customers/exist"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_Exist_Bỏ trống SĐT_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Body trả về có existed = false\", function () {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.existed).to.eql(false);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "f4c544b0-28c2-4f80-830d-afde3af78a7f"
+									}
+								}
+							],
+							"id": "252d24ac-b038-4880-848c-89d357d0f224",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"phone\":\"\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/customers/exist"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_Exist_Nhập sai type SĐT_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Body trả về có existed = false\", function () {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.existed).to.eql(false);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "b7b65991-e089-45ec-ab6f-91ba5b4ce094"
+									}
+								}
+							],
+							"id": "151f128f-e8da-434c-9406-68537825f73e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"phone\":\"03406\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/customers/exist"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_Exist_Nhập chữ_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Body trả về có existed = false\", function () {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.existed).to.eql(false);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "7d2539c8-648b-4ffa-9bfd-40a066631835"
+									}
+								}
+							],
+							"id": "894a193f-ec9b-4f40-a832-5977b6ef5873",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"phone\":\"ádsadf\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/customers/exist"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_Exist_Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo not found\", function () {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Route Not Found\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "4e8eca75-9775-45d1-b172-4a22b303a13f"
+									}
+								}
+							],
+							"id": "404ae077-f612-441f-ab76-8b6f26767d55",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"phone\":\"0346569108\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/cu"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_Exist_sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo not found\", function () {\r",
+											"    let jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Route Not Found\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "26f75a75-4af8-49be-9bad-75237ee547c5"
+									}
+								}
+							],
+							"id": "c66582f9-f512-4ba0-9597-6f378aa165f3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"phone\":\"0346569108\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/customers/exist"
+							},
+							"response": []
+						}
+					],
+					"id": "b846a85f-9ee5-4630-9035-7d666197fb87",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								],
+								"id": "fb70dd13-0c05-4998-b10d-6b630360d558"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								],
+								"id": "6d21840c-8d49-42b8-ab80-dbfbed0256e9"
+							}
+						}
+					]
+				},
+				{
+					"name": "Login_Phone",
+					"item": [
+						{
+							"name": "Login_Phone_Success_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "a0b25f5a-18f2-4261-8750-191f82744c63"
+									}
+								}
+							],
+							"id": "ce7148a8-997e-4f7d-9c6b-e261d86a426e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"0346569108\",\"password\":\"Tuan0987\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"MGFiYTFkZGMtZWZjYy00NjlkLTg2YjYtNTliNzQ5MWU0ZWJj\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Bỏ trống Pass_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện message 'Vui lòng nhập passssss'\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Vui lòng nhập pass\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "e5d1fbcb-e8d9-423e-84e3-150619475c4f"
+									}
+								}
+							],
+							"id": "d047c5e4-e9f0-4a6e-a30a-90e1fdf8b1c1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"0346569108\",\"password\":\"\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"MGFiYTFkZGMtZWZjYy00NjlkLTg2YjYtNTliNzQ5MWU0ZWJj\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Nhập sai Pass_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "a62786e5-44e6-4f6b-ac13-f0937941b7fe"
+									}
+								}
+							],
+							"id": "b74917a2-355e-45ef-b545-d2913fa43ab5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"0346569108\",\"password\":\"1111\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"MGFiYTFkZGMtZWZjYy00NjlkLTg2YjYtNTliNzQ5MWU0ZWJj\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "Login_Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "35f2bc9d-e6aa-4721-b903-e96abdff0a6d"
+									}
+								}
+							],
+							"id": "6bb157e0-2edc-4001-a2f2-c7fd0569786a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"0346569108\",\"password\":\"Tuan0987\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"MGFiYTFkZGMtZWZjYy00NjlkLTg2YjYtNTliNzQ5MWU0ZWJj\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/t"
+							},
+							"response": []
+						},
+						{
+							"name": "Login_Phone_chọn sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "5997fecb-465d-4bd9-a955-9782bf607027"
+									}
+								}
+							],
+							"id": "2d22297f-5436-4a20-b9e5-af99f2551769",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"grant_type\":\"password\",\"email\":\"0346569108\",\"password\":\"Tuan0987\",\"device_id\":\"67b095fe-a231-15f4-ee5d-892478891aaf\",\"captcha\":{\"status\":\"passed\",\"seccode\":\"MGFiYTFkZGMtZWZjYy00NjlkLTg2YjYtNTliNzQ5MWU0ZWJj\",\"type\":\"puzzle\"}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v3/tokens"
+							},
+							"response": []
+						}
+					],
+					"id": "de396af5-f9d8-4cf6-ae96-d05a97af6614"
+				}
+			],
+			"id": "a429cbe5-9daa-4d66-8c06-3cd38d7d248c",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						],
+						"id": "2e94f2ad-dd26-4b27-8091-49110860d32f"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Response time is less than 1500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+							"}); "
+						],
+						"id": "2932bcbb-4733-417e-b618-3e0694e3d33d"
+					}
+				}
+			]
+		},
+		{
+			"name": "Info_Acc",
+			"item": [
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Check_profile_Sucess_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Trả về đúng thông tin profile\", ()=>{\r",
+											"    pm.expect(jsonData.email).to.eql(\"quanngomaiphuc@gmail.com\")\r",
+											"    pm.expect(jsonData.phone_number).to.eql(\"0346569108\")\r",
+											"    pm.expect(jsonData.name).to.eql(\"MrTuan Ngo\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "ca9e4e11-cdfc-4d70-bd23-e7ac0f0c6fa7"
+									}
+								}
+							],
+							"id": "a59aaea7-3ed4-4e95-9d88-d3f5fa9d4f9f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v2/me"
+							},
+							"response": []
+						},
+						{
+							"name": "Check token expired_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "572a6e88-d2b2-42a6-9a24-5e99bad0a281",
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Hiện thông báo 'Phiên làm việc đã hết hạn' \", ()=>{\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "d21f73c1-09a6-4e4e-9397-6d065603ac86",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NDYxODgxMSwiZXhwIjoxNzQ0NzA1MjExLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6Imdvb2dsZSJ9.DDViwZTdEckiVVPMz-ZwulQV4D6o2ikEf3b4NtMvr30r9eCUOErsZPLxQabhaZulEz-nNc0CKMBtJJEPLa6QqjmfCE-W-CV7IBcnbbvYA68XleD_lrl2eE4wHfQBsWuEp2N9InCLE6IPhBCMG4An4FlmV0zQFxud2e1Ca4z5SWikpQNW9o1tQ0rmtMoZJJOn7Ecr6JYXJwJe_aVgSNIL5ScpI7fF5JuItRVsmKWtwf_54TbYwSPjLwb2W6IwRy51olPB7MgVJDVagrceCRYU_-y7iQeEWc9crS_hcPgY7GnKVqjqlEqtX8WmPe36keXkNNhSDQwPPaOkZDYX_yn1O_RogOvpN3DaAbFdI3xVv3JhRMjXWwa3DzH-TLed2syFSGIiHDuF10fajZIW6jpKwSnB81gqR07OGNN93xIYAPqmdrPqt1PCYEDScTRri7N4QLKXxOdQtMp7shZ8TjJporbaGwmNwkE_jndXw08FqZj4ntcGsfh0hSvu_OjuYVP0MmnkD9rZ1KqxY6iaFTJ9tQ1tHhUoyCuBp6LdKpd-gfTy1nLYgOa3lVpEnK1NTmKzKHPqv6na5XNb02H6EQJwMLRgBndn1wZRbgaRF7e17OT2rhw6DKp8c33D1U14Yo3rZT0ojVkNVZMZjz28T1IetYSsGU2vL-8sKcH8QCfkCD8",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v2/me"
+							},
+							"response": []
+						},
+						{
+							"name": "Check ko nhập token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Ko hiện thông tin profile\", ()=>{\r",
+											"    pm.expect(jsonData.email).to.eql(null)\r",
+											"    pm.expect(jsonData.phone_number).to.eql(null)\r",
+											"    pm.expect(jsonData.name).to.eql(null)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "b22b0cba-8cbb-4c47-9d7f-8777168853b3"
+									}
+								}
+							],
+							"id": "8d74f164-10bc-4bbb-8aca-f8d2e92876a3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": "https://tiki.vn/api/v2/me"
+							},
+							"response": []
+						},
+						{
+							"name": "Check nhập sai token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo lỗi\", ()=>{\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Phiên làm việc đã hết hạn\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "1d8b1740-fdc6-4b84-b8a6-236859a5c605"
+									}
+								}
+							],
+							"id": "c27b201f-86a8-4b73-8fb2-841cf7e7425b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NzEzMjQ0MSwiZXhwIjoxNzQ3MjE4ODQxLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIn0.KYroZvkhJZ5dLwHI9KCcAX2bz1Wa3gXUXEI8OmATZRx_z442qiQVNOzYEMoHEgWG0fDMgDz3hdy1Ogb9UmPvJTR-GznEyp6UT0zXBKPZqg8iuP-dKh8IC-1jzrr8lZ9qxglYPVOy3qt67w1ClAwjVTGC63Ydt4iu-eHcY1SHLjX59HPeMeG0Ry9Om7lHh7t0KqxU6ZXK-pcJ0Dtd5I9BkM-j6g-zMCa8gOyGWuWZv6zKYI5zXSqgbndoIyBFjyu-I_gPmJasAB8nP7nfvX9G9_1gE4U4HSi6T0H_i-grlHBNTbwGWoaWSRFTkGF5KE7cqxBpt50kjutrYneU9Dff_DiYtiod6SRF2kLGcQO1DwpckiWi7N8J8-q-PAwEq1SFWeZ0l1TWyfdI9IqFMp4LjRF7-VK54WQLRh4eo8BjqKNeXM14dkK9tSjzleP03pPZyVwN3bPb4aam6EgE1duVfFK_IP3GpZmf1PhfG7BamqtbsWWeQV4Gq4O9jT2pHrjyD__u3wfcY_OCw-kRweQUuWaTRWdbua_JCBjR9znGE8sztCxfYkZdAwY5imZImSe0HDPTMp2EntCpkWb28T1NSjOFOcP2FdcHwH5cQkb1KD_TUdcab8Mtla2xsg11RTXAp3PRl8vR30s8GEwQvIfFyYGVkXyNZ5wi6UcRjM7U30kj",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v2/me"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_profile_ Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "02d9af70-e907-46db-9a2a-93612e7e04ce"
+									}
+								}
+							],
+							"id": "b0d3c94a-6c06-420b-a8c1-21225b54f055",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_profile_Chọn sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "c795ae1b-e889-43c9-8d6e-608a89f944f9"
+									}
+								}
+							],
+							"id": "cbd80a07-8c8f-4721-98d5-6f81c9c7d07b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v2/me"
+							},
+							"response": []
+						}
+					],
+					"id": "e102b504-9ff6-40f4-a4ee-ba5b635e446d"
+				},
+				{
+					"name": "Address, Acc_level",
+					"item": [
+						{
+							"name": "Check_Address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.be.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json().data[0]\r",
+											"pm.test(\"Trả về đúng địa chỉ giao hàng\", ()=> {\r",
+											"    pm.expect(jsonData.country).to.eql(\"Việt Nam\")\r",
+											"    pm.expect(jsonData.district).to.eql(\"Quận Long Biên\")\r",
+											"    pm.expect(jsonData.telephone).to.eql(\"0346569108\")\r",
+											"    pm.expect(jsonData.ward).to.eql(\"Phường Phúc Đồng\")\r",
+											"    pm.expect(jsonData.street).to.include(\"ngõ 231\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "77934542-18d3-4ee0-953e-3a19bce1b22d"
+									}
+								}
+							],
+							"id": "1c94ccbb-2dbd-4dbb-b3c5-34178fe100aa",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v2/me/addresses"
+							},
+							"response": []
+						},
+						{
+							"name": "Check_ Acc_level",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Trả về message 'OK'\", ()=>{\r",
+											"    pm.expect(jsonData.message).to.eql(\"OK\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "f7a2e00b-171f-486e-ad23-5fd35183bf39"
+									}
+								}
+							],
+							"id": "2b13e2f3-cc8e-4740-9b67-7d134dea4a52",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://tiki.vn/api/duck/consumer/external/reward/v1/account"
+							},
+							"response": []
+						}
+					],
+					"id": "f73beef4-e678-437e-a4ea-80dc660ede5b"
+				}
+			],
+			"id": "5d8ecd7a-e68c-4f8e-985b-d08534f7f557",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						],
+						"id": "9ce1e540-0a0b-41e4-b39f-3e821a860830"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Response time is less than 1000ms\", ()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"id": "2fe3e371-7bf5-435d-ac41-7a800046580b"
+					}
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get_Category_Menu_200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Trả về Menu danh mục ở màn hình chính\", ()=>{\r",
+									"    pm.expect(pm.response.text()).to.include(\"Nhà Sách Tiki\")\r",
+									"    pm.expect(pm.response.text()).to.include(\"Nhà Cửa - Đời Sống\")\r",
+									"    pm.expect(pm.response.text()).to.include(\"Điện Thoại - Máy Tính Bảng\")\r",
+									"    pm.expect(pm.response.text()).to.include(\"Thiết Bị Số - Phụ Kiện Số\")\r",
+									"    pm.expect(pm.response.text()).to.include(\"Điện Gia Dụng\")\r",
+									"    pm.expect(pm.response.text()).to.include(\"Làm Đẹp - Sức Khỏe\")\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "04246e36-8429-4a50-9003-23d444a0a6e3"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity',\r",
+									"    method: 'PUT',\r",
+									"    header: [\r",
+									"        { key: 'Content-Type', value: 'application/json' },       \r",
+									"        { key: 'x-access-token', value: pm.collectionVariables.get(\"token\") }],\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            product_id: 263989872,\r",
+									"            parent_item_id: null,\r",
+									"            qty: 1\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    console.log(res.json());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "269a00a4-f4de-491a-8ccd-8f8ccffcef58"
+							}
+						}
+					],
+					"id": "e8899c06-fa57-4888-9c7f-674aa13bd68d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.tiki.vn/raiden/v2/menu-config?platform=desktop",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"raiden",
+								"v2",
+								"menu-config"
+							],
+							"query": [
+								{
+									"key": "platform",
+									"value": "desktop"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Category_Nhập sai URL_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function (){\r",
+									"    pm.response.to.have.status(404)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "f428a423-1064-47ba-8657-57766502d574"
+							}
+						}
+					],
+					"id": "21d61389-e042-4dd2-8f6e-934ed8979612",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.tiki.vn/raid",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"raid"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Category_sai Method_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function (){\r",
+									"    pm.response.to.have.status(404)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "f1540c52-9a20-4b81-99fb-1688a5073b76"
+							}
+						}
+					],
+					"id": "e8421567-69cb-4a82-9942-17449473461a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.tiki.vn/raiden/v2/menu-config?platform=desktop",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"raiden",
+								"v2",
+								"menu-config"
+							],
+							"query": [
+								{
+									"key": "platform",
+									"value": "desktop"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Category(Ancestor)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"let jsonData = pm.response.json()\r",
+									"pm.test(\"Trả về đúng thông tin danh mục cha\", ()=>{\r",
+									"    pm.expect(jsonData.id).to.be.eql(1882);\r",
+									"    pm.expect(jsonData.name).to.be.eql(\"Điện Gia Dụng\");\r",
+									"    pm.expect(jsonData.level).to.be.eql(2);\r",
+									"    pm.expect(jsonData.url_key).to.be.eql(\"dien-gia-dung\");\r",
+									"    pm.expect(jsonData.url_path).to.be.eql(\"dien-gia-dung/c1882\");\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "3d359ea6-239d-46f1-972e-7e572ead030f"
+							}
+						}
+					],
+					"id": "ca5a99fb-b5d2-46c9-b01e-0f7e5f27ac61",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tiki.vn/api/v2/categories/1882?include=ancestors",
+							"protocol": "https",
+							"host": [
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"api",
+								"v2",
+								"categories",
+								"1882"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "ancestors"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Category (Children)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Trả về đúng thông tin danh mục con\", () => {\r",
+									"    pm.expect(jsonData.data[0].parent_id).to.eql(1882);\r",
+									"\r",
+									"    pm.expect(jsonData.data[0].id).to.eql(1884);\r",
+									"    pm.expect(jsonData.data[0].name).to.eql(\"Đồ dùng nhà bếp\");\r",
+									"\r",
+									"    pm.expect(jsonData.data[0].children[0].id).to.eql(1892);\r",
+									"    pm.expect(jsonData.data[0].children[0].name).to.eql(\"Nồi điện các loại\");\r",
+									"\r",
+									"    pm.expect(jsonData.data[0].children[0].children[0].name).to.eql(\"Nồi cơm điện\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "89a7285c-0681-4d5f-b1d8-e486115022ae"
+							}
+						}
+					],
+					"id": "23bbbd32-64a2-4674-99e7-548dc7824dd9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tiki.vn/api/v2/categories?include=children&parent_id=1882",
+							"protocol": "https",
+							"host": [
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"api",
+								"v2",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "children"
+								},
+								{
+									"key": "parent_id",
+									"value": "1882"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Category Definition",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Trả về đúng thông tin\", ()=>{\r",
+									"    pm.expect(jsonData.tikiId).to.eql(\"1882\")\r",
+									"    pm.expect(jsonData.name).to.eql(\"Điện Gia Dụng\")\r",
+									"    pm.expect(jsonData.slug).to.eql(\"dien-gia-dung\")\r",
+									"    pm.expect(jsonData.status).to.eql(1)\r",
+									"    pm.expect(jsonData.level).to.eql(2)\r",
+									"    pm.expect(jsonData.metaTitle).to.eql(\"Hàng Gia Dụng Chính Hãng, Bền Đẹp, Ưu Đãi Đến 40%, Trả Góp 0%\")\r",
+									"\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "c7fcef32-d789-4bee-92e9-f41bfe7c37ed"
+							}
+						}
+					],
+					"id": "8c5fecd8-35ec-4457-8db4-843f60987e54",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.tiki.vn/brickv2/api/public/tiki-categories/info/1882?type=CATEGORY&include_pages=false",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"brickv2",
+								"api",
+								"public",
+								"tiki-categories",
+								"info",
+								"1882"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "CATEGORY"
+								},
+								{
+									"key": "include_pages",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Category (Detail_list)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Có data sản phẩm trả về\", () => {\r",
+									"    pm.expect(jsonData.data).to.not.be.empty;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "40faaa01-240b-446b-b82c-6e410d35a103"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "99890f99-7ee7-4f35-ab70-75a263e14a1c"
+							}
+						}
+					],
+					"id": "6b84fbc2-3538-46dd-a5b3-64eefe961dc5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tiki.vn/api/personalish/v1/blocks/listings?limit=10&sort=top_seller&page=1&urlKey=nha-cua-doi-song&category=1883",
+							"protocol": "https",
+							"host": [
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"api",
+								"personalish",
+								"v1",
+								"blocks",
+								"listings"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "top_seller"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "urlKey",
+									"value": "nha-cua-doi-song"
+								},
+								{
+									"key": "category",
+									"value": "1883"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "bf4049f1-7fdd-4a58-a1c2-35450cbcae3f",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						],
+						"id": "3e737d48-32a4-4061-a275-9322730f583c"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Response time is less than 1000ms\", ()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"id": "0116211b-b98a-4993-85fd-3d395e38ff9d"
+					}
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "View_Cart",
+					"item": [
+						{
+							"name": "View_Cart_Success_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Hiển thị Cart đúng SP, đúng SL\", ()=>{    \r",
+											"    pm.expect(jsonData.items[0].qty).to.eql(parseInt(pm.collectionVariables.get(\"current_qty\")))\r",
+											"    console.log(\"currentQty\", pm.collectionVariables.get(\"current_qty\"))\r",
+											"    pm.expect(jsonData.items[0].product_name).to.include(\"Máy tính cầm tay, máy tính để bàn tính tiền 12 số Deli\")\r",
+											"    pm.expect(jsonData.items[0].list_price).to.eql(142200)\r",
+											"    pm.expect(jsonData.items[1].qty).to.eql(1)\r",
+											"    pm.expect(jsonData.items[1].product_name).to.include(\"Máy Tính Bảng Samsung Galaxy Tab A9\")\r",
+											"    pm.expect(jsonData.items[1].list_price).to.eql(3990000)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "00ac6c60-7269-40be-abce-d49873b0e086"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "021cb01e-c6e8-4fe8-85b2-1be3a54b2ff9"
+									}
+								}
+							],
+							"id": "9d3e446e-990e-442e-8300-148f387ce397",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_Nhập token sai_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Hiển thị Message 'Hết phiên đăng nhập'\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"    \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "b2711b5e-3fcf-4834-b356-c17c00dc7cd7"
+									}
+								}
+							],
+							"id": "f5c4ef14-f4f3-40a2-aa10-bcf454756a4f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eut843mmlmaspdj3asdmsaojkiojncas",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_bỏ trống token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Hiển thị Message 'Hết phiên đăng nhập'\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "d58c62ee-f96c-497e-a839-89ad42f7e6f2"
+									}
+								}
+							],
+							"id": "4fb02f01-efbe-4781-ba54-531cbf1e7ad4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_token hết hạn_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Hiển thị Message 'Hết phiên đăng nhập'\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"    \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "d3b074c4-a343-4e87-b8c1-1788a48adb3a"
+									}
+								}
+							],
+							"id": "b7e8d95a-ea99-4f0e-853f-d3d24befc506",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NDYxODgxMSwiZXhwIjoxNzQ0NzA1MjExLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6Imdvb2dsZSJ9.DDViwZTdEckiVVPMz-ZwulQV4D6o2ikEf3b4NtMvr30r9eCUOErsZPLxQabhaZulEz-nNc0CKMBtJJEPLa6QqjmfCE-W-CV7IBcnbbvYA68XleD_lrl2eE4wHfQBsWuEp2N9InCLE6IPhBCMG4An4FlmV0zQFxud2e1Ca4z5SWikpQNW9o1tQ0rmtMoZJJOn7Ecr6JYXJwJe_aVgSNIL5ScpI7fF5JuItRVsmKWtwf_54TbYwSPjLwb2W6IwRy51olPB7MgVJDVagrceCRYU_-y7iQeEWc9crS_hcPgY7GnKVqjqlEqtX8WmPe36keXkNNhSDQwPPaOkZDYX_yn1O_RogOvpN3DaAbFdI3xVv3JhRMjXWwa3DzH-TLed2syFSGIiHDuF10fajZIW6jpKwSnB81gqR07OGNN93xIYAPqmdrPqt1PCYEDScTRri7N4QLKXxOdQtMp7shZ8TjJporbaGwmNwkE_jndXw08FqZj4ntcGsfh0hSvu_OjuYVP0MmnkD9rZ1KqxY6iaFTJ9tQ1tHhUoyCuBp6LdKpd-gfTy1nLYgOa3lVpEnK1NTmKzKHPqv6na5XNb02H6EQJwMLRgBndn1wZRbgaRF7e17OT2rhw6DKp8c33D1U14Yo3rZT0ojVkNVZMZjz28T1IetYSsGU2vL-8sKcH8QCfkCD8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "cb3d024a-5f42-43c0-9c93-8b980fd87e6e"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "1ee2dc6e-d9df-448a-9163-9d5266de45f2"
+									}
+								}
+							],
+							"id": "ff00ca69-acdf-43db-b4a1-6eaa9c3337a2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/inte"
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code khác 404\", ()=>{\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "4527eb54-f256-44da-9bdb-bb4759402603"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "294e7dd1-bdaf-4bf0-a002-bea53df97c98"
+									}
+								}
+							],
+							"id": "ea5bf667-fdf6-4fec-9797-ec099e9d6ce3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_Giỏ hàng trống",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Trả về Cart rỗng ko có item\", ()=>{\r",
+											"    pm.expect(pm.response.json().items).to.eql([])\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "310d6fe7-50a0-470a-952c-cade44b7df8c"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "5b266a0d-e07c-4282-b4b4-aa6e1668367b"
+									}
+								}
+							],
+							"id": "682bae56-bc3f-4c18-8c5f-8c7a3df744fe",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "{{token_emptyCart}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_  SP có SL = 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let current_qty = parseInt(pm.collectionVariables.get(\"current_qty\"))\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Cart hiện đúng 1 SP, SL = 1\", ()=>{    \r",
+											"    pm.expect(jsonData.items[0].qty).to.eql(current_qty)\r",
+											"    pm.expect(jsonData.items[0].product_name).to.include(\"Máy tính cầm tay, máy tính để bàn\")\r",
+											"    pm.expect(jsonData.items[0].list_price).to.eql(142200)\r",
+											"\r",
+											"\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "7026df94-56f8-4f35-8bfd-eb8a1a6a74d3"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// pm.sendRequest({\r",
+											"//     url: 'https://tiki.vn/api/v2/intended_cart/sellers/113115/items/2e53547d-34a0-11f0-9e50-a6c167f0ee49/quantity',\r",
+											"//     method: 'PUT',\r",
+											"//     header: [\r",
+											"//         { key: 'Content-Type', value: 'application/json' },       \r",
+											"//         { key: 'x-access-token', value: pm.collectionVariables.get(\"token\") }],\r",
+											"//     body: {\r",
+											"//         mode: 'raw',\r",
+											"//         raw: JSON.stringify({\r",
+											"//             product_id: \"263989872\",\r",
+											"//             parent_item_id: null,\r",
+											"//             qty: 1\r",
+											"//         })\r",
+											"//     }\r",
+											"// }, function (err, res) {\r",
+											"//     console.log(res.json());\r",
+											"// });\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "6318ed17-2c19-41da-9a03-659941610e4a"
+									}
+								}
+							],
+							"id": "4c5258d7-69d0-488a-9432-9af9c1be2eed",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_  SP có SL = 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Cart hiện đúng 1 SP, SL = 2\", ()=>{\r",
+											"\r",
+											"    pm.expect(jsonData.items[2].qty).to.eql(2)\r",
+											"    pm.expect(jsonData.items[2].product_name).to.eql(\"Nồi cơm điện tử Toshiba RC-18NTFV(W) (1.8 Lít) - HÀNG CHÍNH HÃNG\")\r",
+											"    pm.expect(jsonData.items[2].list_price).to.eql(2890000)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "6cb305ef-cd2c-46bd-8f5f-d0106b2029c1"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "6805a222-dc83-4bc1-bdbe-23b9f681f9b0"
+									}
+								}
+							],
+							"id": "abae96eb-7f1d-456a-8a6f-1b544004bae6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View_Cart_ nhiều SP và nhiều số lượng",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Hiển thị Cart đúng SP, đúng SL\", ()=>{\r",
+											"    // pm.expect(pm.response.text()).to.include(\"Nhà Sách Tiki\")\r",
+											"    pm.expect(jsonData.items[0].qty).to.eql(1)\r",
+											"    pm.expect(jsonData.items[0].product_name).to.include(\"Máy tính cầm tay, máy tính để bàn\")\r",
+											"    pm.expect(jsonData.items[0].list_price).to.eql(142200)\r",
+											"\r",
+											"    pm.expect(jsonData.items[1].qty).to.eql(1)\r",
+											"    pm.expect(jsonData.items[1].product_name).to.include(\"Máy Tính Bảng Samsung Galaxy Tab A9\")\r",
+											"    pm.expect(jsonData.items[1].list_price).to.eql(3990000)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "c2f7b932-00dd-4edf-ae16-e56e219e16a5"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "24c1396f-7f16-42bf-be89-8ee4daf8c88e"
+									}
+								}
+							],
+							"id": "1b2777bb-027a-4db2-8b70-17461ddd4e77",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tiki.vn/api/v2/intended_cart/items?reset=false&page=1&page_size=30",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"intended_cart",
+										"items"
+									],
+									"query": [
+										{
+											"key": "reset",
+											"value": "false"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "f98c7dc4-8fb1-4095-8912-2c6761d09693"
+				},
+				{
+					"name": "Add_Item",
+					"item": [
+						{
+							"name": "Add_Item_Success_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"// Lấy body dạng raw text\r",
+											"let rawBody = pm.request.body.raw;\r",
+											"\r",
+											"// Parse thành JSON\r",
+											"let jsonBody = JSON.parse(rawBody);\r",
+											"\r",
+											"// Lấy qty\r",
+											"let qtyToAdd = parseInt(jsonBody.products[0].qty);\r",
+											"\r",
+											"// Lấy biến hiện tại\r",
+											"let currentQty = parseInt(pm.collectionVariables.get(\"current_qty\")) || 0;\r",
+											"console.log(\"Qty hiện tại\", currentQty)\r",
+											"\r",
+											"// Cộng dồn\r",
+											"let newQty = currentQty + qtyToAdd;\r",
+											"\r",
+											"// Cập nhật lại biến\r",
+											"pm.collectionVariables.set(\"current_qty\", newQty);\r",
+											"\r",
+											"// Debug log\r",
+											"console.log(`Qty from body: ${qtyToAdd}`);\r",
+											"console.log(`Total qty: ${newQty}`);\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Add Item thành công\", ()=>{\r",
+											"    pm.expect(jsonData.affected_items[0].product_id).to.eql(\"263989872\")\r",
+											"    pm.expect(jsonData.affected_items[0].qty).to.eql(newQty)\r",
+											"    pm.expect(jsonData.affected_items[0].product_name).to.eql(\"Máy tính cầm tay, máy tính để bàn tính tiền 12 số Deli, nhiều màu, dùng cho học sinh, văn phòng, kinh doanh - 1 chiếc - Bạc\")\r",
+											"    pm.expect(pm.response.json().success).to.eql(true)\r",
+											"})\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "fe3b0461-fe78-4dba-9d9a-31849f3c67ab"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "a90d9f79-93f5-4602-9b2c-5b3b46ad785e"
+									}
+								}
+							],
+							"id": "ed02983c-fab5-44a0-9ca0-47f18b8fd8f4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Pragma",
+										"value": "no-cache",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Expires",
+										"value": "0",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\":1}]}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "3ddc9849-a3a4-468b-8f29-621472418397"
+									}
+								}
+							],
+							"id": "0fa79cc3-e02a-41c4-93b2-83fbf17f73ae",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/a"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_Chọn Method sai_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "bf3efdab-d9da-4972-9214-5f4d66c4b9d3"
+									}
+								}
+							],
+							"id": "0dfb18b5-bd8d-41f6-8ef4-ed5bb94ef848",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_nhập sai token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo hết phiên đăng nhập\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "f9151afe-83bf-414e-a16d-263c809da72d"
+									}
+								}
+							],
+							"id": "da75cb94-1f1a-4f5a-983e-0bd8c9cc3d1c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"276448817\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_bỏ trống token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo hết phiên đăng nhập\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											" \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "13e56da4-a194-4b06-85b1-2b0dac92d24f"
+									}
+								}
+							],
+							"id": "e1a67c36-cc0a-4be5-a639-9a69e30dcb0e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"276448817\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_Token Expired_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo hết phiên đăng nhập\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											" \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "053b2751-35db-445a-9065-2e228b001740"
+									}
+								}
+							],
+							"id": "dd968d91-e1bb-4ce7-bc12-f50c2a1ab935",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NTEzODA5MywiZXhwIjoxNzQ1MjI0NDkzLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIn0.kujUVybRNE5JtaSfHB3EmztKMF3w80s555GOiK5wYrnemEAYiuqbnJU3rfitmERCunjWoBqJKiCTIu0pOIPC3GU_ue5hJVnBrAWPdNCkXVyNq7seaB7kf6GAUTCgsDC6bYNEw-Gb0A0wNiKVf_JiNEWz6FEm0SWF5kfU6bdfeuPPQvuEBs0llwkiDEdAGD_zS4ytHmyzhfwpgRbXEG5WxX-zWX3ghL8E6Pxx3CzFeYqJg-thVTfNmraLEcI5pBTHPyPw3CBfkMQIE7JLJlHZI5u2fGWrKRJXcy5emhm5ncdUXPMNkY4AitwOkrYauqaoDAFv2aMjLUGudFeI0y2dudw73pqb6iEP-BRN_853I56DqpnzQ1rHkiugXJkQE5JxjwnIiuCfDuTTnMuqPfIcB8hVOQMJvK32rUCf6R_nR0KaHT-s3nhLO0R4bJ27ponVSt0IDUujQRYmCCC2NfH__Hu9uRbHeaasZ7CmKRKsSy8PP1Q6l-6_euZL2Nhg0uVYGgv0hRS_zFS23NDa4hyK2KixYCI4KbSSV6wtiYrEaGzaEgnkz6PW4_jSOjib1odGUb8CSmr5fiar3hLjT9c4EYNjE3da8tWALcOk9kwuWhb6chrBxlrlbDDGtQQr1KaQpNuH6iUx1JrobPu7Cwr1OpFnYB7cvfb_BbFWT2vtLcI",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"276448817\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_Add 1 SP vs SL = 1_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"// Lấy body dạng raw text\r",
+											"let rawBody = pm.request.body.raw;\r",
+											"\r",
+											"// Parse thành JSON\r",
+											"let jsonBody = JSON.parse(rawBody);\r",
+											"\r",
+											"// Lấy qty\r",
+											"let qtyToAdd = parseInt(jsonBody.products[0].qty);\r",
+											"\r",
+											"// Lấy biến hiện tại\r",
+											"let currentQty = parseInt(pm.collectionVariables.get(\"current_qty\")) || 0;\r",
+											"\r",
+											"// Cộng dồn\r",
+											"let newQty = currentQty + qtyToAdd;\r",
+											"\r",
+											"// Cập nhật lại biến\r",
+											"pm.collectionVariables.set(\"current_qty\", newQty);\r",
+											"\r",
+											"// Debug log\r",
+											"console.log(`Qty from body: ${qtyToAdd}`);\r",
+											"console.log(`Total qty: ${newQty}`);\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Add Item thành công\", ()=>{\r",
+											"    pm.expect(jsonData.affected_items[0].product_id).to.eql(\"263989872\")\r",
+											"    pm.expect(jsonData.affected_items[0].qty).to.eql(newQty)\r",
+											"    pm.expect(jsonData.affected_items[0].product_name).to.eql(\"Máy tính cầm tay, máy tính để bàn tính tiền 12 số Deli, nhiều màu, dùng cho học sinh, văn phòng, kinh doanh - 1 chiếc - Bạc\")\r",
+											"    pm.expect(pm.response.json().success).to.eql(true)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "06758ab3-d31d-48b4-9c85-c6389080534a"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "d26222dc-765d-4a26-94d5-452e221f9fed"
+									}
+								}
+							],
+							"id": "a9e94465-471a-4101-a8fa-8ce83ac63688",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_Add SP vs SL âm_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Add Item ko thành công\", ()=>{\r",
+											"    pm.expect(jsonData.success).to.eql(false)\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Số lượng sản phẩm nhỏ hơn 0\")    \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "7bce5616-2a4e-4878-881a-9f6e5da7781d"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "bf9c1d81-159a-4e36-a8d1-964948bd9ac6"
+									}
+								}
+							],
+							"id": "36318405-b819-42dc-8d62-e83dcf08ada4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\":-1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_Add SP vs SL = 0",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Add Item ko thành công\", ()=>{\r",
+											"    pm.expect(jsonData.success).to.eql(false)\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Số lượng sản phẩm nhỏ hơn 0\")\r",
+											"    \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "ffef8570-d466-4432-965f-548f5162f971"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "d89cf16b-86f0-433e-96e0-2e333d8632be"
+									}
+								}
+							],
+							"id": "a1ce6216-a54d-435c-84b7-9c7101183bce",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\": 0}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_Add 1 SP vs SL > 1_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"// Lấy body dạng raw text\r",
+											"let rawBody = pm.request.body.raw;\r",
+											"\r",
+											"// Parse thành JSON\r",
+											"let jsonBody = JSON.parse(rawBody);\r",
+											"\r",
+											"// Lấy qty\r",
+											"let qtyToAdd = parseInt(jsonBody.products[0].qty);\r",
+											"\r",
+											"// Lấy biến hiện tại\r",
+											"let currentQty = parseInt(pm.collectionVariables.get(\"current_qty\")) || 0;\r",
+											"\r",
+											"// Cộng dồn\r",
+											"let newQty = currentQty + qtyToAdd;\r",
+											"\r",
+											"// Cập nhật lại biến\r",
+											"pm.collectionVariables.set(\"current_qty\", newQty);\r",
+											"\r",
+											"// Debug log\r",
+											"console.log(`Qty from body: ${qtyToAdd}`);\r",
+											"console.log(`Total qty: ${newQty}`);\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Add Item thành công\", ()=>{\r",
+											"    pm.expect(jsonData.affected_items[0].product_id).to.eql(\"263989872\")\r",
+											"    pm.expect(jsonData.affected_items[0].qty).to.eql(newQty)\r",
+											"    pm.expect(jsonData.affected_items[0].product_name).to.eql(\"Máy tính cầm tay, máy tính để bàn tính tiền 12 số Deli, nhiều màu, dùng cho học sinh, văn phòng, kinh doanh - 1 chiếc - Bạc\")\r",
+											"    pm.expect(pm.response.json().success).to.eql(true)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "2a4de35e-8d3d-42a9-a8b0-0be53e91c70d"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "e1b2a7a8-bd5e-48a4-b5b2-6330a91860aa"
+									}
+								}
+							],
+							"id": "dac478de-fa80-41d0-97bc-08191e5c1a99",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\":2}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_trùng_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"// Lấy body dạng raw text\r",
+											"let rawBody = pm.request.body.raw;\r",
+											"\r",
+											"// Parse thành JSON\r",
+											"let jsonBody = JSON.parse(rawBody);\r",
+											"\r",
+											"// Lấy qty\r",
+											"let qtyToAdd = parseInt(jsonBody.products[0].qty);\r",
+											"\r",
+											"// Lấy biến hiện tại\r",
+											"let currentQty = parseInt(pm.collectionVariables.get(\"current_qty\")) || 0;\r",
+											"\r",
+											"// Cộng dồn\r",
+											"let newQty = currentQty + qtyToAdd;\r",
+											"\r",
+											"// Cập nhật lại biến\r",
+											"pm.collectionVariables.set(\"current_qty\", newQty);\r",
+											"\r",
+											"// Debug log\r",
+											"console.log(`Qty from body: ${qtyToAdd}`);\r",
+											"console.log(`Total qty: ${newQty}`);\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Add Item thành công\", ()=>{\r",
+											"    pm.expect(jsonData.affected_items[0].product_id).to.eql(\"263989872\")\r",
+											"    pm.expect(jsonData.affected_items[0].qty).to.eql(newQty)\r",
+											"    pm.expect(jsonData.affected_items[0].product_name).to.eql(\"Máy tính cầm tay, máy tính để bàn tính tiền 12 số Deli, nhiều màu, dùng cho học sinh, văn phòng, kinh doanh - 1 chiếc - Bạc\")\r",
+											"    pm.expect(pm.response.json().success).to.eql(true)\r",
+											" \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "b98a4d22-8f68-4f4d-a6a9-2a8597d8c6b2"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "e3cec825-dfad-4320-9c06-6ffc766ce900"
+									}
+								}
+							],
+							"id": "b033045e-61e5-434d-a8a2-7e0901fde4d2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"263989872\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_SL > hàng tồn kho",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Hiển thị thông báo số lượng còn lại ko đủ\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Số lượng còn lại của sản phẩm này là\")\r",
+											"    pm.expect(pm.response.json().success).to.eql(false)\r",
+											" \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "b0d9c206-ad71-403c-a69f-42868db27653"
+									}
+								}
+							],
+							"id": "d6333abc-3629-4c96-a701-a405593cbfa1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"274101975\",\"qty\":1554544}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Item_hết hàng",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function (){\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Hiển thị thông báo SP đang hết hàng\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Sản phẩm hiện đang\")\r",
+											"    pm.expect(pm.response.json().success).to.eql(false)\r",
+											" \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "77f5773f-cf11-4553-b342-618787bd1318"
+									}
+								}
+							],
+							"id": "d7cbe627-e1e3-4571-bc01-9ee4eb0d9738",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"products\":[{\"product_id\":\"271140896\",\"qty\":1}]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/carts/mine/items"
+							},
+							"response": []
+						}
+					],
+					"id": "0a07d000-d9c3-4872-85d3-2f0e73266e41",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								],
+								"id": "40867dc2-907c-4a08-be4e-81fa98164000"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								],
+								"id": "dbe44774-890e-450c-bf83-444be723930b"
+							}
+						}
+					]
+				},
+				{
+					"name": "Edit_Cart",
+					"item": [
+						{
+							"name": "Tăng số lượng_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// Lấy body dạng raw text\r",
+											"let rawBody = pm.request.body.raw;\r",
+											"\r",
+											"// Parse thành JSON\r",
+											"let jsonBody = JSON.parse(rawBody);\r",
+											"\r",
+											"// Lấy số lượng đã gửi để so sánh\r",
+											"let qtyToAdd = parseInt(jsonBody.qty);\r",
+											"\r",
+											"// Parse response JSON\r",
+											"let jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Giảm SL\", () => {\r",
+											"    pm.expect(jsonData.success).to.be.eql(true);\r",
+											"    pm.expect(parseInt(jsonData.qty)).to.be.eql(qtyToAdd); // Ép kiểu string -> number\r",
+											"    pm.expect(jsonData.result_code).to.be.eql(\"SUCCESS\");\r",
+											"});\r",
+											"\r",
+											"// Set biến collection về số lượng hiện tại\r",
+											"pm.collectionVariables.set(\"current_qty\", qtyToAdd);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "8fb0fa51-4915-4eeb-b01e-b97aa9ea5b25"
+									}
+								}
+							],
+							"id": "b45822e3-438c-4b0c-9fc2-7262cd4e5528",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":263989872,\"parent_item_id\":null,\"qty\":6}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						},
+						{
+							"name": "Giảm số lượng_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// Lấy body dạng raw text\r",
+											"let rawBody = pm.request.body.raw;\r",
+											"\r",
+											"// Parse thành JSON\r",
+											"let jsonBody = JSON.parse(rawBody);\r",
+											"\r",
+											"// Lấy số lượng đã gửi để so sánh\r",
+											"let qtyToAdd = jsonBody.qty;\r",
+											"console.log(\"qtytoAdd\", qtyToAdd)\r",
+											"\r",
+											"// Parse response JSON\r",
+											"let jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Giảm SL\", () => {\r",
+											"    pm.expect(jsonData.success).to.be.eql(true);\r",
+											"    pm.expect(parseInt(jsonData.qty)).to.be.eql(qtyToAdd); // Ép kiểu string -> number\r",
+											"    pm.expect(jsonData.result_code).to.be.eql(\"SUCCESS\");\r",
+											"});\r",
+											"\r",
+											"// Set biến collection về số lượng hiện tại\r",
+											" pm.collectionVariables.set(\"current_qty\", qtyToAdd);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "a3e6c29b-75dd-497a-bb15-db80c79a443f"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "14bd5176-e60c-488b-b5e8-ea1bbb4bc413"
+									}
+								}
+							],
+							"id": "d124add7-4c23-40a8-9159-fc092a96956d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":263989872,\"parent_item_id\":null,\"qty\":1}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						},
+						{
+							"name": "Giảm số lượng về 0_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Giảm SL về 0 - xoá thất bại vì cần có thao tác từ FE\", ()=>{    \r",
+											"    pm.expect(jsonData.success).to.be.eql(false)   \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "713177e3-10cd-4294-a13f-37497dafce29"
+									}
+								}
+							],
+							"id": "7882790a-457b-43a8-8086-0ccfeee330c4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token_emptyCart}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":263989872,\"parent_item_id\":null,\"qty\":0}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						},
+						{
+							"name": "Giảm số lượng về số âm_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400); \r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"SL sản phẩm ko được là âm\", ()=>{    \r",
+											"    pm.expect(jsonData.success).to.be.eql(false)   \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "8d5726ec-2317-470a-aff2-fb3afba72fdd"
+									}
+								}
+							],
+							"id": "0a599285-6b3d-4e6d-9939-e3e3cd848d69",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token_emptyCart}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":263989872,\"parent_item_id\":null,\"qty\":-10}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit_Cart ko nhập token_400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Hiển thị thông báo Phiên làm việc đã hết hạn\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "d6859ca5-c4b3-4f91-a85a-71f81e55587b"
+									}
+								}
+							],
+							"id": "ab28bce4-3218-4878-a3cf-4e05902c1adf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":54510165,\"parent_item_id\":null,\"qty\":6}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit_Cart nhập token hết hạn_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Hiển thị thông báo Phiên làm việc đã hết hạn\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"    \r",
+											" \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "b90c42be-3998-4158-8a28-a83862d237dc"
+									}
+								}
+							],
+							"id": "a874e381-f55b-4b08-8ebe-a56645dba40d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":54510165,\"parent_item_id\":null,\"qty\":6}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit_Cart nhập sai token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json().data\r",
+											"pm.test(\"Hiển thị thông báo Phiên làm việc đã hết hạn\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"    \r",
+											" \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "970603b7-8e7c-48f2-992e-468bdf0b0b55"
+									}
+								}
+							],
+							"id": "fecfe58e-2f5c-46ef-be56-4fff3694f817",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NTMwNjEzNSwiZXhwIjoxNzQ1MzkyNTM1LCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIn0.RIPq9kbjZaR9Vj9RJ4uUV0LCW0kZAzsEbrl8vQnpFdYBqLJRzqNLw_bVSawnWuF07DFp6GasZoyk4WNRI-8TUE6Ej-a3oFZC0dOGW-1ZF3dqjWWf53fRalP3DfZFLBULH3G7g5wmfgR8b5rwv6-pJnfkYD7MNB1fFtDgZFNtgdq-fBIO0WBeQh60JgSO0yPqh0Kt4XY3Ml2ZWAZlH-5szUdh0hp8ojVA9A2U8juVamWFCywwuoDDElJ5ndzlRPOhiixxfFY4_X_YhC6oui2RTDbokSCVJhyCP_v5XIs1tUdFgr4hMfcwWLpwEVhB7XBbXgJUEWNNyWz_6rVNVOA92oBstfTxNx752uxiEv43naNBm7s-upe5_zjK2J_II3vTRwpWc6k2HNI_rCM-xnXwdsuqYTnbN_XV0h6M--4czrp_ZI1k2qGO1PpI_o7B9edh2G_jT44owP14Nm26eAgo-zzYjoAnQiAWqZrs_6J4kVMlFFn66xFNe8Sk8aYCIrkBHaWT79vOXQrscmNWnXbcrXBymCMryEtzxcIpxibi9oHY-7-3_YaVH_OCKYWYNeSzH0UDT7Cjudlza9tAzbOx6DGSc6ug1HC_hwPThlrzZeHjKp2SjQx3vQmlEk870NwSZ8xmsYfSIy9DYnKIFhY4QixgizhS7CDbXs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":54510165,\"parent_item_id\":null,\"qty\":6}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit_Cart_Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "a0ec7ece-28c5-44cc-aa2c-c2285cc08a52"
+									}
+								}
+							],
+							"id": "c0743ab6-da88-442e-a7a1-e04d62b79ef7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":54510165,\"parent_item_id\":null,\"qty\":6}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intend"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit_Cart_sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", ()=>{\r",
+											"    pm.response.to.have.status(400)\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "debaf732-1e4a-42ae-b8fd-471a1545fc25"
+									}
+								}
+							],
+							"id": "2549166f-f270-4b33-9b91-a4c7cb9dfa0c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"product_id\":54510165,\"parent_item_id\":null,\"qty\":6}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/sellers/113115/items/704cfb2e-3c87-11f0-af97-5661c631220f/quantity"
+							},
+							"response": []
+						}
+					],
+					"id": "d94e053a-7fa5-444c-9575-0629821471ef"
+				},
+				{
+					"name": "Delete_Cart",
+					"item": [
+						{
+							"name": "Delete Product _Dummy_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Trả về đúng thông tin SP đã xoá\", ()=>{\r",
+											"    pm.expect(pm.response.json().isDeleted).to.be.true\r",
+											"    pm.expect(pm.response.json().deletedOn).to.not.be.null\r",
+											"    pm.expect(pm.response.json().title).to.include(\"Essence Mascara Lash Princess\")\r",
+											"    pm.expect(pm.response.json().description).to.include(\"The Essence Mascara Lash Princess is a popular mascara known for its\")\r",
+											"    pm.expect(pm.response.json().price).to.eql(9.99)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "5e40a01a-38bc-4a9f-b6c8-841dd1d2e20b"
+									}
+								}
+							],
+							"id": "b3a5f6fc-d30e-4bbb-adb0-7fb6707d908f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "https://dummyjson.com/products/1"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_ để trống token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo hết phiên đăng nhập\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "1d3c3c14-0504-4caa-8b49-d4e43fc66973"
+									}
+								}
+							],
+							"id": "9673d34d-1ec9-474b-911f-a7a787aaef49",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/intended_cart/selected_items"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_ nhập sai token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo hết phiên đăng nhập\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "c9e5f3fe-9376-44e6-8db8-a3de68186e70"
+									}
+								}
+							],
+							"id": "e694fe68-427b-45e0-b804-c4e3ee42c533",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://tiki.vn/api/v2/intended_cart/selected_items"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_ dùng token hết hạn_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo hết phiên đăng nhập\", ()=>{\r",
+											"    pm.expect(pm.response.text()).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại.\")\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "ec0e02a6-d51f-4447-9cc1-b340bcafff8a"
+									}
+								}
+							],
+							"id": "a9e6d936-60f5-460b-bbd4-ecb252761582",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "https://tiki.vn/api/v2/intended_cart/selected_items"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_ Nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "7baa901e-ccc8-4648-be3e-d535092a35ac"
+									}
+								}
+							],
+							"id": "ee73c267-bf64-4b02-bfa6-ed2f6859e6ac",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/int"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_ Chọn Method sai_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "6c1d48b6-4777-4f66-9654-ed21d39c3a14"
+									}
+								}
+							],
+							"id": "92729e5b-3682-435e-b006-c28faf57f111",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://tiki.vn/api/v2/int"
+							},
+							"response": []
+						}
+					],
+					"id": "635b3130-d663-4e66-aa06-0d18084294be"
+				}
+			],
+			"id": "37186968-9152-4ee9-b1b9-5bf831fb6c57",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						],
+						"id": "aff9c061-5bbc-4d30-8c03-0e3f2e21bbbc"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Response time is less than 1000\", ()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"id": "37cacad8-6e41-4e63-a698-c2e1b1772cae"
+					}
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Detail_product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"let jsonData = pm.response.json()\r",
+									"pm.test(\"Sản phẩm hiện đúng thông tin (tên, id, giá,...) \", ()=>{\r",
+									"    pm.expect(jsonData.id).to.eql(153885246)\r",
+									"    pm.expect(jsonData.name).to.eql(\"Bia Hanoi Premium - Thùng 24 lon 330ml\")\r",
+									"    pm.expect(jsonData.short_url).to.eql(\"https://tiki.vn/product-p153885246.html?spid=153885247\")\r",
+									"    pm.expect(jsonData.price).to.eql(349000)\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "d9a1cc42-7f9f-4fcf-ae3a-0c159bb607e2"
+							}
+						}
+					],
+					"id": "753375c7-db14-4207-8ab3-d4ffb1fa3d6f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tiki.vn/api/v2/products/153885246?platform=web&spid=153885247&version=3",
+							"protocol": "https",
+							"host": [
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"api",
+								"v2",
+								"products",
+								"153885246"
+							],
+							"query": [
+								{
+									"key": "platform",
+									"value": "web"
+								},
+								{
+									"key": "spid",
+									"value": "153885247"
+								},
+								{
+									"key": "version",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail_product_Nhập sai URL_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function (){\r",
+									"    pm.response.to.have.status(404)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "4a533e88-3f6c-46a1-9282-36b4c9c56545"
+							}
+						}
+					],
+					"id": "217b53c7-379a-458d-817f-323a8b01ef20",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://tiki.vn/api/v2/prod"
+					},
+					"response": []
+				},
+				{
+					"name": "Detail_product_sai Method_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function (){\r",
+									"    pm.response.to.have.status(404)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "4d9602e3-1989-465b-8722-08c3ec3a0735"
+							}
+						}
+					],
+					"id": "e956d68f-624d-4d27-b2ed-c8f143f236ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tiki.vn/api/v2/products/153885246?platform=web&spid=153885247&version=3",
+							"protocol": "https",
+							"host": [
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"api",
+								"v2",
+								"products",
+								"153885246"
+							],
+							"query": [
+								{
+									"key": "platform",
+									"value": "web"
+								},
+								{
+									"key": "spid",
+									"value": "153885247"
+								},
+								{
+									"key": "version",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product_Get_Feedback",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"let jsonData = pm.response.json()\r",
+									"pm.test(\"Trả về đúng feedback sản phẩm (tên KH, title, nội dung đánh giá, số sao...) \", ()=>{\r",
+									"    pm.expect(jsonData.reviews_count).to.eql(37)\r",
+									"    \r",
+									"    pm.expect(jsonData.data[0].created_by.name).to.eql(\"Minh Châu\")\r",
+									"    pm.expect(jsonData.data[0].title).to.eql(\"Cực kì hài lòng\")\r",
+									"    pm.expect(jsonData.data[0].content).to.eql(\"Vô cùng hài lòng!! Đóng gói cẩn thận, đặt đêm hôm trước sáng hôm sau mở mắt đã có hàng luôn. \\n*** cao mới đẹp và hiện đại!!\")\r",
+									"    pm.expect(jsonData.data[0].rating).to.eql(5)\r",
+									"\r",
+									"    pm.expect(jsonData.data[1].created_by.name).to.eql(\"Vân Vũ\")\r",
+									"    pm.expect(jsonData.data[1].title).to.eql(\"Cực kì hài lòng\")\r",
+									"    pm.expect(jsonData.data[1].content).to.eql(\"Bao bì đẹp xuất sắc 👍 Đúng chất premium\\nVị cũng rất thơm, thích nhất trong các loại bia từng uống\")\r",
+									"    pm.expect(jsonData.data[1].rating).to.eql(5)    \r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "3624a68d-be9b-47ed-82c8-de163167953b"
+							}
+						}
+					],
+					"id": "43f44667-ad5a-4b7b-9049-e5877b321e54",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tiki.vn/api/v2/reviews?limit=5&include=comments,contribute_info,attribute_vote_summary&sort=score%7Cdesc,id%7Cdesc,stars%7Call&page=1&spid=153885247&product_id=153885246&seller_id=239404",
+							"protocol": "https",
+							"host": [
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"api",
+								"v2",
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "include",
+									"value": "comments,contribute_info,attribute_vote_summary"
+								},
+								{
+									"key": "sort",
+									"value": "score%7Cdesc,id%7Cdesc,stars%7Call"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "spid",
+									"value": "153885247"
+								},
+								{
+									"key": "product_id",
+									"value": "153885246"
+								},
+								{
+									"key": "seller_id",
+									"value": "239404"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "ab0f7653-4423-4bb3-927b-82c3d575ce0f",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						],
+						"id": "ef014b67-b587-4da9-b325-c4ed3d42a1cf"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Response time is less than 1000ms\", ()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"id": "b24a7b9f-879e-43fb-a2b8-7839ce1ecb84"
+					}
+				}
+			]
+		},
+		{
+			"name": "Chanel",
+			"item": [
+				{
+					"name": "Get_All_Chanel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200: \", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"let jsonData = pm.response.json()\r",
+									"pm.test(\"Hiện đúng thông tin các đoạn chanel chat(id chanel, tên chanel...) \", ()=>{\r",
+									"    pm.expect(jsonData.data[0].channel_id).to.eql(\"29378890_01:342555\")\r",
+									"    pm.expect(jsonData.data[0].channel_name).to.eql(\"BrotherStore\")\r",
+									"\r",
+									"    pm.expect(jsonData.data[1].channel_id).to.eql(\"29378890_01:180553\")\r",
+									"    pm.expect(jsonData.data[1].channel_name).to.eql(\"Honda ủy nhiệm Hoàng Việt\")\r",
+									"\r",
+									"    pm.expect(jsonData.data[2].channel_id).to.eql(\"29378890_01:29952\")\r",
+									"    pm.expect(jsonData.data[2].channel_name).to.eql(\"Hồng Hạnh Mobile\")\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "5d14d16d-992c-4685-b473-97308dc072c1"
+							}
+						}
+					],
+					"id": "e6771426-fb87-4491-a272-2175554b559b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.tiki.vn/v2/chatapi/channels/personal?limit=20",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"v2",
+								"chatapi",
+								"channels",
+								"personal"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Detail_Chanel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 \", ()=>{\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"let jsonData = pm.response.json()\r",
+									"pm.test(\"Hiện đúng thông tin đoạn chanel chat(id chanel, tên chanel, loại chanel, loại doanh nghiệp, tin nhắn mới nhất,...) \", ()=>{\r",
+									"    \r",
+									"    pm.expect(jsonData.data[0].sender_id).to.eql(\"01:29952\")\r",
+									"    pm.expect(jsonData.data[0].sender_type).to.eql(\"biz\")\r",
+									"    pm.expect(jsonData.data[0].sender_agent_name).to.eql(\"Hồng Hạnh Mobile\")\r",
+									"    \r",
+									"    pm.expect(jsonData.data[0].data.code).to.eql(\"PTHH20\")\r",
+									"    pm.expect(jsonData.data[0].data.text).to.eql(\"Giảm 20K\")\r",
+									"    pm.expect(jsonData.data[0].data.subText).to.include(\"Giảm 20K cho đơn hàng từ 2 triệu\")\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "3bd80475-cc57-4b0b-809b-4584e5c9d149"
+							}
+						}
+					],
+					"id": "d326e99d-21de-44d4-abdb-b39b2bf5dd71",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.tiki.vn/v2/chatapi/messages/personal?channel_id=29378890_01:29952&biz_id=null&channel_type=b2c&version=v2&is_search_message=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"v2",
+								"chatapi",
+								"messages",
+								"personal"
+							],
+							"query": [
+								{
+									"key": "channel_id",
+									"value": "29378890_01:29952"
+								},
+								{
+									"key": "biz_id",
+									"value": "null"
+								},
+								{
+									"key": "channel_type",
+									"value": "b2c"
+								},
+								{
+									"key": "version",
+									"value": "v2"
+								},
+								{
+									"key": "is_search_message",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Chanel_ko nhập token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function (){\r",
+									"    pm.response.to.have.status(400)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Hiện thông báo thiếu token\", ()=>{    \r",
+									"    pm.expect(pm.response.text()).to.include(\"Required parameter x-access-token is missing\")\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "d59a69c3-0bb7-4442-8941-4a3461838dbe"
+							}
+						}
+					],
+					"id": "0e2d87b8-ec8e-439a-952e-e55f161ac340",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.tiki.vn/v2/chatapi/channels/personal?page=1&biz_id=null&limit=20&is_receiver_approved=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"v2",
+								"chatapi",
+								"channels",
+								"personal"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "biz_id",
+									"value": "null"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "is_receiver_approved",
+									"value": "true"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Chanel_nhập sai token_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 4xx \", ()=>{\r",
+									"    pm.response.to.have.status(401)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Hiện thông báo Invalid token\", ()=>{ \r",
+									"    pm.expect(pm.response.text()).to.include(\"Invalid token\")\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "6bb74afa-9375-4da7-9be9-cfe13177831f"
+							}
+						}
+					],
+					"id": "1171c70a-5937-4278-9d95-3bac494c629a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "ákdopasjdioasdhioqwd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.tiki.vn/v2/chatapi/channels/personal?page=1&biz_id=null&limit=20&is_receiver_approved=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"v2",
+								"chatapi",
+								"channels",
+								"personal"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "biz_id",
+									"value": "null"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "is_receiver_approved",
+									"value": "true"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Chanel_nhập token hết hạn_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401 \", ()=>{\r",
+									"    pm.response.to.have.status(401)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Hiện thông báo Invalid token\", ()=>{ \r",
+									"    pm.expect(pm.response.text()).to.include(\"Invalid token\")\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "656c1100-6129-45c3-9dd3-00841038abf7"
+							}
+						}
+					],
+					"id": "026a1683-16aa-45b0-8b35-d9a40eef4c04",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "ákdopasjdioasdhioqwd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.tiki.vn/v2/chatapi/channels/personal?page=1&biz_id=null&limit=20&is_receiver_approved=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"v2",
+								"chatapi",
+								"channels",
+								"personal"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "biz_id",
+									"value": "null"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "is_receiver_approved",
+									"value": "true"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_All_Nhập sai URL_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function (){\r",
+									"    pm.response.to.have.status(404)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "d47be38f-337a-47b2-b385-55e6f4d1789c"
+							}
+						}
+					],
+					"id": "8e744aaa-5c89-412c-a31d-295c638041fd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.tiki.vn/v2/chata",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"v2",
+								"chata"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_All_Chọn sai Method_4xx",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function (){\r",
+									"    pm.response.to.have.status(404)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"id": "2d77df66-a11c-4e48-b21c-dec6a5d66d2f"
+							}
+						}
+					],
+					"id": "a08dd207-c76e-4b29-9d82-d7b9fe09c68f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.tiki.vn/v2/chatapi/channels/personal?page=1&biz_id=null&limit=20&is_receiver_approved=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"tiki",
+								"vn"
+							],
+							"path": [
+								"v2",
+								"chatapi",
+								"channels",
+								"personal"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "biz_id",
+									"value": "null"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "is_receiver_approved",
+									"value": "true"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "bb1a2206-c29f-4277-b4e9-38c1365bc693",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						],
+						"id": "ebd18416-b089-41c5-ba50-d5d0518cd17c"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Respond is less than 1500 ms\", ()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500)\r",
+							"})"
+						],
+						"id": "79da3b15-3c10-4ff2-8a86-9fc60429a343"
+					}
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "List_Order",
+					"item": [
+						{
+							"name": "List_order Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Trả về chính xác danh sách đơn hàng (mã đơn, tên đơn, số lượng giá,...)\", function () {\r",
+											"    pm.expect(jsonData.data[0].id).to.be.eql(\"516740686\")\r",
+											"    pm.expect(jsonData.data[0].description).to.be.include(\"Headphone Tai Nghe Chụp Tai bluetooth Rockspace\")\r",
+											"    pm.expect(jsonData.data[0].status).to.be.eql(\"canceled\")\r",
+											"    pm.expect(jsonData.data[0].status_text).to.be.eql(\"Đã hủy\")\r",
+											"    pm.expect(jsonData.data[0].grand_total).to.be.eql(421950)\r",
+											"\r",
+											"    pm.expect(jsonData.data[1].id).to.be.eql(\"538387550\")\r",
+											"    pm.expect(jsonData.data[1].description).to.be.include(\"Loa Bluetooth LG XBOOM GO XG2 - Hàng Chính Hãng\")\r",
+											"    pm.expect(jsonData.data[1].status).to.be.eql(\"canceled\")\r",
+											"    pm.expect(jsonData.data[1].status_text).to.be.eql(\"Đã hủy\")\r",
+											"    pm.expect(jsonData.data[1].grand_total).to.be.eql(691000)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "bfb35628-1ddb-4876-a1ba-9079f410c563"
+									}
+								}
+							],
+							"id": "6c650a0a-9342-4891-9f6b-248fea39e29a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders?page=0&limit=10",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List_order_bỏ trống token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Phiên làm việc đã hết hạn\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "e2a463e6-a16d-4111-a419-27b96d3e2fca"
+									}
+								}
+							],
+							"id": "db700c51-698d-41e1-af7f-c29dfed1d11c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders?page=0&limit=10",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List_order_nhập sai token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Phiên làm việc đã hết hạn\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "8ded022f-15ad-49fe-b002-27fa52180cb5"
+									}
+								}
+							],
+							"id": "e962a4e7-ed47-4912-8ee3-c8ff51d24e7c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "39483oapsjmaspodnio1gb4i8hedD",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders?page=0&limit=10",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List_order_Nhập token hết hạn_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo Phiên làm việc đã hết hạn\", function () {\r",
+											"    pm.expect(pm.response.json().error.message).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại\")    \r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "c54a5593-46cf-4bc5-82eb-9f032e7958b6"
+									}
+								}
+							],
+							"id": "d828f7e5-4668-490c-b7b8-f12ee06737f6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NDYxODgxMSwiZXhwIjoxNzQ0NzA1MjExLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6Imdvb2dsZSJ9.DDViwZTdEckiVVPMz-ZwulQV4D6o2ikEf3b4NtMvr30r9eCUOErsZPLxQabhaZulEz-nNc0CKMBtJJEPLa6QqjmfCE-W-CV7IBcnbbvYA68XleD_lrl2eE4wHfQBsWuEp2N9InCLE6IPhBCMG4An4FlmV0zQFxud2e1Ca4z5SWikpQNW9o1tQ0rmtMoZJJOn7Ecr6JYXJwJe_aVgSNIL5ScpI7fF5JuItRVsmKWtwf_54TbYwSPjLwb2W6IwRy51olPB7MgVJDVagrceCRYU_-y7iQeEWc9crS_hcPgY7GnKVqjqlEqtX8WmPe36keXkNNhSDQwPPaOkZDYX_yn1O_RogOvpN3DaAbFdI3xVv3JhRMjXWwa3DzH-TLed2syFSGIiHDuF10fajZIW6jpKwSnB81gqR07OGNN93xIYAPqmdrPqt1PCYEDScTRri7N4QLKXxOdQtMp7shZ8TjJporbaGwmNwkE_jndXw08FqZj4ntcGsfh0hSvu_OjuYVP0MmnkD9rZ1KqxY6iaFTJ9tQ1tHhUoyCuBp6LdKpd-gfTy1nLYgOa3lVpEnK1NTmKzKHPqv6na5XNb02H6EQJwMLRgBndn1wZRbgaRF7e17OT2rhw6DKp8c33D1U14Yo3rZT0ojVkNVZMZjz28T1IetYSsGU2vL-8sKcH8QCfkCD8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders?page=0&limit=10",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List_order nhập URL sai",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Hiện thông báo not found\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Route Not Found\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "9cc39e84-4b19-4ab3-aa8a-06c3ef2d647b"
+									}
+								}
+							],
+							"id": "080e58a7-9754-42a3-a3f9-cc68232109cf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v2/o"
+							},
+							"response": []
+						},
+						{
+							"name": "List_order chọn sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Hiện thông báo Route Not Found\", function () {\r",
+											"    pm.expect(pm.response.text()).to.be.include(\"Route Not Found\")    \r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "dae20a3f-d765-4307-96f0-3164ba855ed3"
+									}
+								}
+							],
+							"id": "c68826bf-857b-4c1f-b7b2-a32d17635f89",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders?page=0&limit=10",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "9c7a729e-182c-45c8-bce6-431fdf081c07"
+				},
+				{
+					"name": "Detail_Order",
+					"item": [
+						{
+							"name": "Detail_Order_Success_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json()\r",
+											"pm.test(\"Trả về chính xác danh sách đơn hàng (mã đơn, tên đơn, số lượng giá,...)\", function () {\r",
+											"    pm.expect(jsonData.id).to.be.eql(\"538387550\")\r",
+											"    pm.expect(jsonData.description).to.be.include(\"Loa Bluetooth LG XBOOM GO XG2 - Hàng Chính Hãng\")\r",
+											"    pm.expect(jsonData.items[0].qty).to.be.eql(1)\r",
+											"    pm.expect(jsonData.items[0].price).to.be.eql(691000)\r",
+											"    pm.expect(jsonData.items[0].subtotal).to.be.eql(691000)\r",
+											"    pm.expect(jsonData.status).to.be.eql(\"canceled\")\r",
+											"    pm.expect(jsonData.status_text).to.be.eql(\"Đã hủy\")  \r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "0925ecaa-4fd7-4769-a60f-f269febf3a45"
+									}
+								}
+							],
+							"id": "b47db5d7-2ba6-442a-a65d-65a6e4e6f82c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/me/orders/538387550?include=items,price_summary,child_orders,status_histories",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"me",
+										"orders",
+										"538387550"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "items,price_summary,child_orders,status_histories"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detail_Order nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "284d3781-a1da-4e41-ab5c-6cbd974bdf71"
+									}
+								}
+							],
+							"id": "252e49fb-6370-4023-a4a6-1b504830c588",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": "https://tiki.vn/api/v2/me/ord"
+							},
+							"response": []
+						},
+						{
+							"name": "Detail_Order dùng Method sai_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo not found\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Route Not Found\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "53fafbbb-29c3-4fcb-a463-eeb47bfee0b3"
+									}
+								}
+							],
+							"id": "c1b3375b-69c7-4584-a7fd-4548a119bba8",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/me/orders/400611492?include=items,price_summary,child_orders,status_histories",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"me",
+										"orders",
+										"400611492"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "items,price_summary,child_orders,status_histories"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detail_Order ko nhập token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Unauthorized\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Unauthorized\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "52e92bf7-1181-47f1-8ef5-504cb6990b9e"
+									}
+								}
+							],
+							"id": "b5d54bc8-28ce-4356-8483-fdf02029cf7e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/me/orders/400611492?include=items,price_summary,child_orders,status_histories",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"me",
+										"orders",
+										"400611492"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "items,price_summary,child_orders,status_histories"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detail_Order nhập token sai",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Unauthorized\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Unauthorized\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "4b464f45-8c98-4947-940a-5c94a84084fb"
+									}
+								}
+							],
+							"id": "cc523b4c-8aba-4634-abbf-383b3c8f2674",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "oiasjdioashoid",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/me/orders/400611492?include=items,price_summary,child_orders,status_histories",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"me",
+										"orders",
+										"400611492"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "items,price_summary,child_orders,status_histories"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detail_Order dùng token hết hạn_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Unauthorized\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Unauthorized\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "513ad4bb-b663-425c-9afe-2ae01078f531"
+									}
+								}
+							],
+							"id": "a296dcad-d3cc-47e1-aa38-362bd0e78c6b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NTQwOTgyMCwiZXhwIjoxNzQ1NDk2MjIwLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIn0.gUjTf5jO2eVWue5uQxFeeCc2_0iT3ySe4UXOoUKaeGuh2ZxQbLbZ8B-KzrK5-ZPNNZaINkTKUvgsFmHQYijxbN8Gd_3OpTx8kZp7qhJxJm1dc6lfoIiMXlQmgkpH3R1_999acRr2X9lIHqFfInCentdVEq8x1Ulf4YW8HPqV0CuSii30e6KUYR6gRNXtOzXSa8cBQJLUrzo0a52kKC4UjQgPCi0s-LceHeAsYcY3IzkiCFZw7Br7CZUFPbV0kK2msV2x0pNeyp1Akup2EuXqyj4FhuXgQ_pd6i62Ou8wDKjOhwD-1zDmJjyf-GPBYqg0RbJZuIhYssUagJwExeeEblkakExkfEhxJ1tlbQCw8B_DxQSonfUGtxidcVR0zeRhUUpbUARpuW62rhhNTFR52Ol0q7_T9Kr6jrjIEuNB3V6jHNJ0WCvkho6T9OpQq3ALcbf_hVuBtFvJ1D9e66QQHHXnj8rNYoV2x56QJ4cdxWrxkOM8mFIfHxyDuK9v8dV6ZsyNOkiu-afVmVKmNqW2LkeRkqMi_az0IK2_27DGljAEzh1tiKi0hbMZ9NScHuQ74_qE9xNKMN8qu0pIk0gmCCAbgX9sqld-oAIN8oc5WjcUD4uXCYcA1tRLgBcZDjLKgmE6zyBDbNB7hXV3VNvHrL44LFMjlcRT6MzoRZqaVUE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/me/orders/400611492?include=items,price_summary,child_orders,status_histories",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"me",
+										"orders",
+										"400611492"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "items,price_summary,child_orders,status_histories"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "fd4a3d8f-c47b-4980-b9ca-cfc9d5e9fc5f"
+				},
+				{
+					"name": "Search_Order",
+					"item": [
+						{
+							"name": "Search_Order_Success_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Trả về đúng thông tin đơn hàng(mã đơn, tên đơn, giá, trạng thái,...) the keyword\", function () {\r",
+											"    pm.expect(jsonData.data[0].id).to.be.eql(\"799059061\")\r",
+											"    pm.expect(jsonData.data[0].description).to.be.include(\"Thần Tượng Gấu Wash Tee: Sự Hoà Quyện Độc Đáo Của Thời Trang\")\r",
+											"    pm.expect(jsonData.data[0].status).to.be.eql(\"canceled\")\r",
+											"    pm.expect(jsonData.data[0].status_text).to.be.eql(\"Đã hủy\")\r",
+											"    pm.expect(jsonData.data[0].grand_total).to.be.eql(252000)\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "e2ba6242-9099-42b9-9276-228ad1917c8f"
+									}
+								}
+							],
+							"id": "5d098df5-1e45-48b2-9941-e57b29456fa0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders/search?text=wash",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "wash"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search_Order_nhập sai URL_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo not found\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Route Not Found\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "6a0dad84-3531-465f-9d07-faced8b11372"
+									}
+								}
+							],
+							"id": "cfe7d8a7-bc9c-4c62-95a1-59a22f43b186",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://tiki.vn/api/v2/ord"
+							},
+							"response": []
+						},
+						{
+							"name": "Search_Order_chọn sai Method_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function (){\r",
+											"    pm.response.to.have.status(404)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo not found\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Route Not Found\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "16916183-13ef-4779-be74-e6e57d0c3a93"
+									}
+								}
+							],
+							"id": "61a1d44a-eeeb-4290-9404-1583a390608f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders/search?text=wash",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "wash"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search_Order_bỏ trống token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Phiên làm việc đã hết hạn\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "5e569022-e618-4fdc-9377-ace6859be83d"
+									}
+								}
+							],
+							"id": "ed8c2297-e5ec-421c-8293-6e499ea4fafb",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders/search?text=wash",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "wash"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search_Order_nhập sai token_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Phiên làm việc đã hết hạn\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "972dc30d-36c4-4dec-b3b2-cd732e160c7e"
+									}
+								}
+							],
+							"id": "e959aac5-69d4-4438-9f7d-5481ea24be1c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "h90253nfjasop",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders/search?text=wash",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "wash"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search_Order_nhập token hết hạn_4xx",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 4xx\", ()=>{\r",
+											"    pm.response.to.have.status(401)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Hiện thông báo Phiên làm việc đã hết hạn\", function () {\r",
+											"    pm.expect(jsonData.error.message).to.include(\"Phiên làm việc đã hết hạn, vui lòng đăng xuất và đăng nhập lại\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "932f6d79-30c2-40d2-91d6-86619e1b56c9"
+									}
+								}
+							],
+							"id": "7eec03a1-8125-4eee-babd-2d813c5e3954",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc0NTQwOTgyMCwiZXhwIjoxNzQ1NDk2MjIwLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIn0.gUjTf5jO2eVWue5uQxFeeCc2_0iT3ySe4UXOoUKaeGuh2ZxQbLbZ8B-KzrK5-ZPNNZaINkTKUvgsFmHQYijxbN8Gd_3OpTx8kZp7qhJxJm1dc6lfoIiMXlQmgkpH3R1_999acRr2X9lIHqFfInCentdVEq8x1Ulf4YW8HPqV0CuSii30e6KUYR6gRNXtOzXSa8cBQJLUrzo0a52kKC4UjQgPCi0s-LceHeAsYcY3IzkiCFZw7Br7CZUFPbV0kK2msV2x0pNeyp1Akup2EuXqyj4FhuXgQ_pd6i62Ou8wDKjOhwD-1zDmJjyf-GPBYqg0RbJZuIhYssUagJwExeeEblkakExkfEhxJ1tlbQCw8B_DxQSonfUGtxidcVR0zeRhUUpbUARpuW62rhhNTFR52Ol0q7_T9Kr6jrjIEuNB3V6jHNJ0WCvkho6T9OpQq3ALcbf_hVuBtFvJ1D9e66QQHHXnj8rNYoV2x56QJ4cdxWrxkOM8mFIfHxyDuK9v8dV6ZsyNOkiu-afVmVKmNqW2LkeRkqMi_az0IK2_27DGljAEzh1tiKi0hbMZ9NScHuQ74_qE9xNKMN8qu0pIk0gmCCAbgX9sqld-oAIN8oc5WjcUD4uXCYcA1tRLgBcZDjLKgmE6zyBDbNB7hXV3VNvHrL44LFMjlcRT6MzoRZqaVUE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders/search?text=wash",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "wash"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search_Order_ko tồn tại_200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", ()=>{\r",
+											"    pm.response.to.have.status(200)\r",
+											"})\r",
+											"\r",
+											"let jsonData = pm.response.json();\r",
+											"pm.test(\"Trả về Data rỗng\", function () {\r",
+											"    pm.expect(pm.response.json().data.length).to.eql(0);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"id": "20b8be06-b8cc-4620-b923-b7e1de45ef19"
+									}
+								}
+							],
+							"id": "4bffea21-ab85-4a2c-b7db-205377a1da7c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tiki.vn/api/v2/orders/search?text=ádjasoidjoiasjd",
+									"protocol": "https",
+									"host": [
+										"tiki",
+										"vn"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "ádjasoidjoiasjd"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "817eaf8c-e3e1-4a18-8519-031eed720ad9"
+				}
+			],
+			"id": "3c3d8211-b475-4622-92da-480edba8dc0f",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						],
+						"id": "e4b6969b-37a3-45e5-931c-9583d47667d5"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Response is less than 1500 ms\", ()=>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500)\r",
+							"})"
+						],
+						"id": "426635e6-e59a-4707-847c-9092f895888d"
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "698d2c58-9fb4-431f-a061-3ba882e2776b",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"token = \"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyOTM3ODg5MCIsImlhdCI6MTc1MDgzNjI3MCwiZXhwIjoxNzUwOTIyNjcwLCJpc3MiOiJodHRwczovL3Rpa2kudm4iLCJjdXN0b21lcl9pZCI6IjI5Mzc4ODkwIiwiZW1haWwiOiJxdWFubmdvbWFpcGh1Y0BnbWFpbC5jb20iLCJjbGllbnRfaWQiOiJ0aWtpLXNzbyIsIm5hbWUiOiIyOTM3ODg5MCIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIn0.VBPXEWmO5-hhAQHcdEgyxdm4tHa1iEXc2HRZ65Ui-aGWrvvuBVHIRX6Q-EhwhhRESC3yOZUYIB7e29IOjxBqTlWQU35b1JH0hy1ImHHoihVNdyJ5xUSUqkmreheQhAIX0srqX3YckX3GQZKtY3IQG--5-efKfRV1w2Q0zff2V-9iinqeWFEqaNKd2u0hHBFEplSyMqhkZoI0DvtFoRLjpGqU3S93EGuhsjRoqKO61v6FPCdISQ2XxsFgGvbB--_e8MWDygWZPImqgxtGAdYcWkaPxTmcguic4bpW-XEX8vbHZj_oCp53ERaOjfkNTwpZB8D8EMGtb7Mq0nhuLQB6q0kNy2v9Vzz8PMowleSDHEDd4avKh8bnMwQPDljtpqJJXy5vOo8zE-pshx0KrBP0a60kQQL1wPDsWWSv7Qb9QB2GeZ_N9MNFjgQlpPk3UjE9UWqKFZUwUOLpg8IITUDJ4F071MPxf0SM1h8LyKZZnLJWaTMS6Hph0YuGSA-B7PH-IkpwICKguBtVHXkpNE_kIKjppR2zu6sEL4RWJ338vYSAjA0MII7KSR-wKeC1a-Q0Avgl1jeLiTmF99F4nRwFJlwuSiDbbU8_w8WKSrxAZ4ADqD3x_pyBOQCWU5S8C1kc_S16uDSMNMwAoQbotj8w3M09QS6TcOa11UgIiBpxkVM\"\r",
+					"pm.collectionVariables.set(\"token\", token)\r",
+					"\r",
+					"\r",
+					"token_emptyCart = \"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3NjkxMjMyIiwiaWF0IjoxNzUwODM2MzU0LCJleHAiOjE3NTA5MjI3NTQsImlzcyI6Imh0dHBzOi8vdGlraS52biIsImN1c3RvbWVyX2lkIjoiNzY5MTIzMiIsImVtYWlsIjoiIiwiY2xpZW50X2lkIjoidGlraS1zc28iLCJuYW1lIjoiNzY5MTIzMiIsInNjb3BlIjoic3NvIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIn0.q_2HDK5LeLxE5EPZtmd-7tnUl433g55yMkY7hidp_57KFNy2Wy8rxrdyxmxCNN46Ukgg0QS7-cIteWKcLAEdMRf-F9GoctvoCp0E9RAU1dSonqhbBRt_8fEVpRrW4-siOXtyhqTLf1QjKLrtj8U5VVBbgAs261HHvlTOWMLPYZArOpfMmy8T74J1SHAYyv0HU38t2Nh8Md-Js1TsHRlgqIKUG9PEijjMg2MembXcQNL_Fk4NWVDsI0W2ps6AHv3Wc2S7dRMtHUihdPtFn6VdV_Vhrv6VMsqkMwczzwQtIb9wDeORyNmG_VJWv6uv7M3Kv4He7MAjnYixMM68dBdeDLU0ISDqO2SmrcwL6YGYts8RoUvU8fhY4uSyatmkBegNbJ-MSZjVFj7bp-76FFXMGfJsH3yR-oruZd9IXD2Los06o7iGCgnWVQYQccPjI92pYqg-zCb10H2ZaLfotqL6oCeRnc7OoZGJz-dhioJtdhmW5_nZ-H0ANgW1F_00eIjihAAOvQKJq0YXOOQ11ng57XEYMc-s02yBezANmkZDQcdgVLOKxwqL9qOjmjiy53KSA9DKC-oE6oFfmm79njVeDKg7tgau3tEAZOmD26DNJm6dplrCdlkms02PPFoy5FIxb-N88ICIH7OK-YeyWpGCv2P0PW6OTX2dzsgmBWurX2o\"\r",
+					"pm.collectionVariables.set(\"token_emptyCart\", token_emptyCart)"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2da2e4b3-05e9-477f-b0a6-62857d4b63a4",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "token_emptyCart",
+			"value": ""
+		},
+		{
+			"key": "current_qty",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
