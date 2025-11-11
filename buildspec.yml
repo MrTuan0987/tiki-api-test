@@ -9,7 +9,7 @@ phases:
   build:
     commands:
       - echo "🚀 Running API tests with Newman..."
-      - newman run collection.json --reporters cli,htmlextra --reporter-htmlextra-export report.html || true
+      - newman run colletionjson.json --reporters cli,htmlextra --reporter-htmlextra-export report.html || true
       - echo "✅ Test completed. Uploading report to S3..."
       - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F_%H-%M)-report.html
       - |
@@ -24,3 +24,4 @@ phases:
 artifacts:
   files:
     - report.html
+
