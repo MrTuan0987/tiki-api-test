@@ -3,12 +3,24 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo "Updating system packages..."
+      - yum update -y
+      - echo "Installing latest npm..."
+      - npm install -g npm@latest
+      - echo "Installing Node.js v20..."
+      - curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+      - yum install -y nodejs
+      - echo "Node and npm versions:"
+      - node -v
+      - npm -v
       - echo "Installing Newman CLI..."
       - npm install -g newman newman-reporter-htmlextra
+
   build:
     commands:
       - echo "Running Postman tests..."
       - newman run Postman_Collections/colletionjson.json -r htmlextra --reporter-htmlextra-export report.html || BUILD_FAILED=true
+
   post_build:
     commands:
       - echo "Uploading report to S3..."
