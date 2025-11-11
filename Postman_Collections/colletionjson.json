@@ -6413,17 +6413,14 @@
 	],
 	"variable": [
 		{
-			"id": "c49c701b-34e1-4e27-922a-97e856f542d2",
 			"key": "token",
 			"value": ""
 		},
 		{
-			"id": "688948ab-35ef-43a9-a89d-0382c08afb94",
 			"key": "token_emptyCart",
 			"value": ""
 		},
 		{
-			"id": "15964bb8-7a04-4f2b-ba8f-676dacc19f75",
 			"key": "current_qty",
 			"value": "1",
 			"type": "string"
