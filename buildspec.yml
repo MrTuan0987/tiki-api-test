@@ -9,7 +9,7 @@ phases:
     commands:
       - echo "🚀 Running API tests with Newman..."
       # chạy newman, nếu fail thì vẫn tạo report nhưng lưu exit code
-      - newman run Postman_Collections/colletionjson.json -e environment.json --reporters cli,htmlextra --reporter-htmlextra-export report.html
+      - newman run Postman_Collections/colletionjson.json --reporters cli,htmlextra --reporter-htmlextra-export report.html
       - TEST_EXIT_CODE=$?
       - echo "✅ Test completed. Uploading report to S3..."
       - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F_%H-%M)-report.html
@@ -25,4 +25,5 @@ phases:
 artifacts:
   files:
     - report.html
+
 
