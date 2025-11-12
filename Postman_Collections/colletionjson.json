@@ -19,7 +19,7 @@
 									"script": {
 										"id": "9ba65ef1-ff02-4fce-af07-01444753fc3b",
 										"exec": [
-											"pm.test(\"Status code is 66666666666667777\", function (){\r",
+											"pm.test(\"Status code is 555555555555555\", function (){\r",
 											"    pm.response.to.have.status(400)\r",
 											"});\r",
 											"\r",
@@ -933,7 +933,7 @@
 									"script": {
 										"id": "ca9e4e11-cdfc-4d70-bd23-e7ac0f0c6fa7",
 										"exec": [
-											"pm.test(\"Status code is 888888888888\", ()=>{\r",
+											"pm.test(\"Status code is 333333333333333333\", ()=>{\r",
 											"    pm.response.to.have.status(200)\r",
 											"})\r",
 											"\r",
@@ -6415,14 +6415,17 @@
 	],
 	"variable": [
 		{
+			"id": "49c670ed-7b0d-4ee8-8062-fd5dd790028c",
 			"key": "token",
 			"value": ""
 		},
 		{
+			"id": "60f2ee24-2382-4f88-9784-78820745ad29",
 			"key": "token_emptyCart",
 			"value": ""
 		},
 		{
+			"id": "f6581334-d1e2-484c-8520-03363e68195b",
 			"key": "current_qty",
 			"value": "1"
 		}
