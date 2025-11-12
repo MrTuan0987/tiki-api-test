@@ -2,26 +2,20 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 22
     commands:
-      - echo "📦 Installing Newman..."
       - npm install -g newman newman-reporter-htmlextra
-
   build:
     commands:
       - echo "🚀 Running API tests with Newman..."
-      - newman run Postman_Collections/colletionjson.json \
-          --reporters cli,htmlextra \
-          --reporter-htmlextra-export report.html \
-          --suppress-exit-code
-      - TEST_EXIT_CODE=$?
-      - echo "📂 Checking report file..."
-      - ls -l report.html || echo "⚠️ report.html not found"
-      - echo "☁️ Uploading report to S3..."
-      - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F-%H-%M)-report.html --region ap-southeast-1
+      - newman run collection.json -e environment.json --reporters cli,htmlextra --reporter-htmlextra-export report.html || true
+      - echo "✅ Test completed. Uploading report to S3..."
+      - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F_%H-%M)-report.html
       - |
-        if [ $TEST_EXIT_CODE -ne 0 ]; then
+        if grep -q "failure" report.html; then
           echo "❌ Test failed! Sending SNS alert..."
-          aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:110581573910:api-alert \
+          aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:<your-account-id>:api-alert \
             --message "Tiki API test failed. Check report in S3."
         else
           echo "✅ All tests passed!"
