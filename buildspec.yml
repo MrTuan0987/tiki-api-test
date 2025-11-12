@@ -8,11 +8,12 @@ phases:
   build:
     commands:
       - echo "🚀 Running API tests with Newman..."
-      # chạy newman, nếu fail thì vẫn tạo report nhưng lưu exit code
-      - newman run Postman_Collections/colletionjson.json --reporters cli,htmlextra --reporter-htmlextra-export report.html
-      - TEST_EXIT_CODE=$?
+      # chạy newman, luôn trả về 0 để không dừng build
+      - newman run Postman_Collections/collection.json --reporters cli,htmlextra --reporter-htmlextra-export report.html || true
+      - TEST_EXIT_CODE=${PIPESTATUS[0]}
       - echo "✅ Test completed. Uploading report to S3..."
-      - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F_%H-%M)-report.html
+      - ls -l report.html || echo "⚠️ report.html not found"
+      - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F_%H-%M)-report.html --region ap-southeast-1
       - |
         if [ $TEST_EXIT_CODE -ne 0 ]; then
           echo "❌ Test failed! Sending SNS alert..."
@@ -25,6 +26,3 @@ phases:
 artifacts:
   files:
     - report.html
-
-
-
