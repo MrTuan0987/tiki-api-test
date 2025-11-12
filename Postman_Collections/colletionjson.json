@@ -6415,17 +6415,14 @@
 	],
 	"variable": [
 		{
-			"id": "49c670ed-7b0d-4ee8-8062-fd5dd790028c",
 			"key": "token",
 			"value": ""
 		},
 		{
-			"id": "60f2ee24-2382-4f88-9784-78820745ad29",
 			"key": "token_emptyCart",
 			"value": ""
 		},
 		{
-			"id": "f6581334-d1e2-484c-8520-03363e68195b",
 			"key": "current_qty",
 			"value": "1"
 		}
