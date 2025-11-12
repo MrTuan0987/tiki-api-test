@@ -9,13 +9,13 @@ phases:
   build:
     commands:
       - echo "🚀 Running API tests with Newman..."
-      - newman run collection.json -e environment.json --reporters cli,htmlextra --reporter-htmlextra-export report.html || true
+      - newman run colletionjson.json --reporters cli,htmlextra --reporter-htmlextra-export report.html || true
       - echo "✅ Test completed. Uploading report to S3..."
       - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F_%H-%M)-report.html
       - |
         if grep -q "failure" report.html; then
           echo "❌ Test failed! Sending SNS alert..."
-          aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:<your-account-id>:api-alert \
+          aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:110581573910:api-alert \
             --message "Tiki API test failed. Check report in S3."
         else
           echo "✅ All tests passed!"
@@ -24,3 +24,4 @@ phases:
 artifacts:
   files:
     - report.html
+
