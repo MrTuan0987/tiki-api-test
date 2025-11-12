@@ -3,39 +3,25 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Updating system packages..."
-      - yum update -y
-      - echo "Installing latest npm..."
-      - npm install -g npm@latest
-      - echo "Installing Node.js v20..."
-      - curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
-      - yum install -y nodejs
-      - echo "Node and npm versions:"
-      - node -v
-      - npm -v
-      - echo "Installing Newman CLI..."
+      - echo "📦 Installing Newman..."
       - npm install -g newman newman-reporter-htmlextra
-
   build:
     commands:
-      - echo "Running Postman tests..."
-      - newman run Postman_Collections/colletionjson.json -r htmlextra --reporter-htmlextra-export report.html || BUILD_FAILED=true
-
-  post_build:
-    commands:
-      - echo "Uploading report to S3..."
-      - aws s3 cp report.html s3://$S3_BUCKET/reports/$(date +%F_%H-%M-%S)_report.html
+      - echo "🚀 Running API tests with Newman..."
+      # chạy newman, nếu fail thì vẫn tạo report nhưng lưu exit code
+      - newman run Postman_Collections/collection.json -e environment.json --reporters cli,htmlextra --reporter-htmlextra-export report.html
+      - TEST_EXIT_CODE=$?
+      - echo "✅ Test completed. Uploading report to S3..."
+      - aws s3 cp report.html s3://tiki-api-report-bucket/$(date +%F_%H-%M)-report.html
       - |
-        if [ "$BUILD_FAILED" = true ]; then
-          echo "Build failed! Sending SNS alert..."
-          aws sns publish --topic-arn $SNS_TOPIC_ARN --message "❌ Tiki API Test Failed. Check S3 bucket: $S3_BUCKET"
-          exit 1
+        if [ $TEST_EXIT_CODE -ne 0 ]; then
+          echo "❌ Test failed! Sending SNS alert..."
+          aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:110581573910:api-alert \
+            --message "Tiki API test failed. Check report in S3."
         else
-          echo "✅ All tests passed successfully."
-          aws sns publish --topic-arn $SNS_TOPIC_ARN --message "✅ Tiki API Test Passed! Report uploaded to S3: $S3_BUCKET"
+          echo "✅ All tests passed!"
         fi
 
 artifacts:
   files:
     - report.html
-  discard-paths: yes
