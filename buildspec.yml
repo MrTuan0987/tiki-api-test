@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: 22
     commands:
-      - npm install -g newman newman-reporter-htmlextra
+      - npm install -g newman@latest newman-reporter-htmlextra@latest
   build:
     commands:
       - echo "🚀 Running API tests with Newman..."
@@ -24,5 +24,6 @@ phases:
 artifacts:
   files:
     - report.html
+
 
 
