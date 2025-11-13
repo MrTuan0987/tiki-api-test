@@ -15,7 +15,7 @@ phases:
       - |
         if grep -q "failure" report.html; then
           echo "❌ Test failed! Sending SNS alert..."
-          aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:110581573910:api-alert \
+          aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:xxxxxxxxxx:api-alert \
             --message "Tiki API test failed. Check report in S3."
         else
           echo "✅ All tests passed!"
@@ -24,6 +24,7 @@ phases:
 artifacts:
   files:
     - report.html
+
 
 
 
