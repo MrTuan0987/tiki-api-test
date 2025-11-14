@@ -9,8 +9,8 @@ ________________________________________
 - Đồng bộ Postman Collection với GitHub để theo dõi thay đổi và tự động kích hoạt pipeline.
 ________________________________________
 
-⚙️ AWS CI/CD Pipeline
-Hệ thống CI/CD được thiết kế bằng các dịch vụ AWS:
+⚙️ AWS CI/CD Pipeline.
+- Hệ thống CI/CD được thiết kế bằng các dịch vụ AWS:
   
   1️⃣ CodePipeline
   - Theo dõi GitHub repository.
@@ -21,7 +21,7 @@ Hệ thống CI/CD được thiết kế bằng các dịch vụ AWS:
   - Sinh báo cáo kiểm thử và tải lên S3.
  
   3️⃣ S3
-  - Lưu trữ log, artifact và kết quả kiểm thử.
+  - Lưu trữ report kết quả kiểm thử.
   
   4️⃣ SNS
   - Gửi thông báo về email sau khi pipeline hoàn tất (Success / Failed).
