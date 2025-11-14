@@ -5,31 +5,31 @@ Project này xây dựng hệ thống kiểm thử tự động (Automation Test
 Mục tiêu chính: giảm thao tác thủ công, tăng tốc độ kiểm thử và đảm bảo chất lượng API ổn định.
 
 🧪 Test Automation with Postman
-•	Viết testcase kiểm tra API response bằng JavaScript.
-•	Đồng bộ Postman Collection với GitHub để theo dõi thay đổi và tự động kích hoạt pipeline.
+- Viết testcase kiểm tra API response bằng JavaScript.
+- Đồng bộ Postman Collection với GitHub để theo dõi thay đổi và tự động kích hoạt pipeline.
 
 
 ⚙️ AWS CI/CD Pipeline
 Hệ thống CI/CD được thiết kế bằng các dịch vụ AWS:
   
   1️⃣ CodePipeline
-  •	Theo dõi GitHub repository.
-  •	Khi có commit → tự động kích hoạt pipeline.
+  - Theo dõi GitHub repository.
+  - Khi có commit → tự động kích hoạt pipeline.
   
   2️⃣ CodeBuild
-  •	Chạy Postman Collection bằng Newman theo cấu hình trong buildspec.yml.
-  •	Sinh báo cáo kiểm thử và tải lên S3.
+  - Chạy Postman Collection bằng Newman theo cấu hình trong buildspec.yml.
+  - Sinh báo cáo kiểm thử và tải lên S3.
  
   3️⃣ S3
-  •	Lưu trữ log, artifact và kết quả kiểm thử.
+  - Lưu trữ log, artifact và kết quả kiểm thử.
   
   4️⃣ SNS (Optional)
-  •	Gửi thông báo sau khi pipeline hoàn tất (Success / Failed).
+  - Gửi thông báo sau khi pipeline hoàn tất (Success / Failed).
   
 ________________________________________
 📊 Logging & Reporting
-•	Logs build và test được theo dõi trực tiếp trên CloudWatch.
-•	Kết quả kiểm thử được lưu trong S3 và sử dụng làm báo cáo đánh giá chất lượng API định kỳ.
+- Logs build và test được theo dõi trực tiếp trên CloudWatch.
+- Kết quả kiểm thử được lưu trong S3 và sử dụng làm báo cáo đánh giá chất lượng API định kỳ.
 
 ________________________________________
 🚀 Workflow Summary
