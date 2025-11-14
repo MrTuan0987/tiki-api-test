@@ -41,12 +41,12 @@ ________________________________________
 
 ________________________________________
 📌 Technologies Used
-•	Postman / Newman – API Testing
-•	GitHub – Version control
-•	AWS CodePipeline – CI/CD Orchestration
-•	AWS CodeBuild – Execute automated tests
-•	AWS S3 – Artifact & log storage
-•	AWS CloudWatch – Log monitoring
-•	AWS SNS – Notification service
+- Postman / Newman – API Testing
+- GitHub – Version control
+- AWS CodePipeline – CI/CD Orchestration
+- AWS CodeBuild – Execute automated tests
+- AWS S3 – Artifact & log storage
+- AWS CloudWatch – Log monitoring
+- AWS SNS – Notification service
 
 
