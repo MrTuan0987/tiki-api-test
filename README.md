@@ -1,13 +1,13 @@
 API Automation Testing with Postman & AWS CI/CD
-
-📌 Overview
+________________________________________
+📌 Overview: 
 Project này xây dựng hệ thống kiểm thử tự động (Automation Testing) cho API của Tiki bằng Postman, kết hợp quy trình CI/CD trên AWS nhằm tự động hóa toàn bộ quá trình kiểm thử và báo cáo kết quả.
 Mục tiêu chính: giảm thao tác thủ công, tăng tốc độ kiểm thử và đảm bảo chất lượng API ổn định.
-
+________________________________________
 🧪 Test Automation with Postman
 - Viết testcase kiểm tra API response bằng JavaScript.
 - Đồng bộ Postman Collection với GitHub để theo dõi thay đổi và tự động kích hoạt pipeline.
-
+________________________________________
 
 ⚙️ AWS CI/CD Pipeline
 Hệ thống CI/CD được thiết kế bằng các dịch vụ AWS:
@@ -23,8 +23,8 @@ Hệ thống CI/CD được thiết kế bằng các dịch vụ AWS:
   3️⃣ S3
   - Lưu trữ log, artifact và kết quả kiểm thử.
   
-  4️⃣ SNS (Optional)
-  - Gửi thông báo sau khi pipeline hoàn tất (Success / Failed).
+  4️⃣ SNS
+  - Gửi thông báo về email sau khi pipeline hoàn tất (Success / Failed).
   
 ________________________________________
 📊 Logging & Reporting
