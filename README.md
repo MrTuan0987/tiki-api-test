@@ -11,6 +11,7 @@ Mục tiêu chính: giảm thao tác thủ công, tăng tốc độ kiểm thử
 
 ⚙️ AWS CI/CD Pipeline
 Hệ thống CI/CD được thiết kế bằng các dịch vụ AWS:
+  
   1️⃣ CodePipeline
   •	Theo dõi GitHub repository.
   •	Khi có commit → tự động kích hoạt pipeline.
